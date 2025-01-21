@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
 import { Row, Col, Image, Navbar, Nav } from 'react-bootstrap';
 import { Button, Card, Heading, Text } from '@radix-ui/themes';
-import { Calendar, Question, Play, Pause, Waveform, ChatCircle, SpeakerHigh, Globe, Phone, Plugs, ShieldCheck, ChartLine, Voicemail, UserCircle, Pill, Check, Person, SquaresFour, CheckFat, PhoneOutgoing, PhoneIncoming, Link } from '@phosphor-icons/react';
+import { Calendar, Play, Pause, Waveform, ChatCircle, SpeakerHigh, Globe, Phone, Plugs, ChartLine, Voicemail, UserCircle, Pill, Check, Person, SquaresFour, CheckFat, Link, CurrencyDollar, Clock, Star, CheckCircle } from '@phosphor-icons/react';
 import { useMediaQuery } from './shared-functions.js';
 import { ThemeContext } from './Theme.js';
 import Marquee from "react-fast-marquee";
@@ -15,10 +15,14 @@ export default function Home() {
   const integrationsRef = useRef(null);
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentAudio, setCurrentAudio] = useState(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
   const heroAudioRef = useRef(new Audio('/assets/audio/alex-appointment-reminder.wav'));
+  const appointmentReminderAudioRef = useRef(new Audio('/assets/audio/alex-appointment-reminder.wav'));
+  const patientIntakeAudioRef = useRef(new Audio('/assets/audio/adrian-patient-intake.wav'));
+  const medicationReminderAudioRef = useRef(new Audio('/assets/audio/alex-medication-reminder.wav'));
 
   let isPageWide = useMediaQuery('(min-width: 640px)');
   const { theme } = useContext(ThemeContext);
@@ -30,13 +34,27 @@ export default function Home() {
     });
   };
 
-  const toggleAudio = () => {
-    if (isPlaying) {
-      heroAudioRef.current.pause();
-    } else {
-      heroAudioRef.current.play();
+  const toggleAudio = (audioRef) => {
+    // If this is the currently playing audio, toggle play/pause
+    if (currentAudio === audioRef) {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        audioRef.current.play();
+        setIsPlaying(true);
+      }
     }
-    setIsPlaying(!isPlaying);
+    // Otherwise just play the new audio
+    else {
+      // Pause currently playing audio if any
+      if (currentAudio) {
+        currentAudio.current.pause();
+      }
+      audioRef.current.play();
+      setIsPlaying(true);
+      setCurrentAudio(audioRef);
+    }
   };
 
   useEffect(() => {
@@ -91,18 +109,17 @@ export default function Home() {
             <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 20 }}>
               <Col xs={12} sm={12} md={12} lg={12} xl={12} style={{ textAlign: 'left' }}>
                 <Heading size={isPageWide ? '9' : '8'} as='div'>
-                  AI phone agents for clinics
+                  AI phone agents for health clinics
                 </Heading>
               </Col>
             </Row>
 
             <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
               <Col xs={12} sm={10} md={10} lg={10} xl={10} style={{ textAlign: 'left' }}>
-                <Text size={isPageWide ? '4' : '3'} color="gray" as='div'>Appointment reminders, intake calls, medication reminders, health risk assessments, and more.</Text>
-                <Text size='4' color="gray" as='div' style={{ marginTop: 10 }}><Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Available 24/7</Text>
+                <Text size={isPageWide ? '4' : '3'} color="gray" as='div'>Automated appointment reminders, intake calls, review requests, medication reminders, and more.</Text>
+                <Text size='4' color="gray" as='div' style={{ marginTop: 10 }}><Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Available 24/7/365</Text>
                 <Text size='4' color="gray" as='div' style={{ marginTop: 5 }}><Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> HIPAA compliant</Text>
-                <Text size='4' color="gray" as='div' style={{ marginTop: 5 }}><Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Avoid no-shows</Text>
-                <Text size='4' color="gray" as='div' style={{ marginTop: 5 }}><Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Better patient engagement</Text>
+              
               </Col>
             </Row>
 
@@ -118,13 +135,9 @@ export default function Home() {
 
           <Col xs={12} sm={10} md={8} lg={5} xl={5} style={{ textAlign: 'center', maxWidth: 600 }}>
             <Card style={{ 
-              padding: '20px 20px 15px 20px',
               marginTop: 20,
-              borderRadius: 20,
-              border: '1px solid var(--gray-6)',
-              backgroundColor: 'var(--gray-1)'
             }}>
-              <Image src="/assets/agents/appointment-reminder.jpg" width="100%" style={{ marginBottom: 15 }} />
+              <Image src="/assets/agents/appointment-reminder-alex.jpg" width="100%" style={{ marginBottom: 15 }} />
               
               <Text size='5' as='div' style={{ textAlign: 'center', fontWeight: 'bold' }}>Listen to a sample call</Text>
               <Text size='2' color="gray" as='div' style={{ textAlign: 'center' }}>AI Appointment Reminder Agent</Text>
@@ -134,15 +147,27 @@ export default function Home() {
                 alignItems: 'center',
                 gap: '10px',
                 marginTop: 10,
-                width: '100%'
+                width: '100%',
+                backgroundColor: '#FFF1F0',
+                padding: '10px 16px',
+                border: '1px solid var(--accent-6)',
+                borderRadius: '32px'
               }}>
                 <Button
-                  variant="ghost"
+                  variant="solid"
                   size="2"
-                  onClick={toggleAudio}
-                  style={{ padding: 5 }}
+                  onClick={() => toggleAudio(heroAudioRef)}
+                  style={{ 
+                    padding: 8,
+                    borderRadius: '50%',
+                    width: 36,
+                    height: 36,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
                 >
-                  {isPlaying ? (
+                  {isPlaying && currentAudio === heroAudioRef ? (
                     <Pause size={18} weight="bold" />
                   ) : (
                     <Play size={18} weight="bold" />
@@ -176,7 +201,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <Text size="1" style={{ minWidth: 60 }}>
+                <Text size="3" style={{ minWidth: 60 }}>
                   {duration ?
                     `${Math.floor(currentTime / 60)}:${String(Math.floor(currentTime % 60)).padStart(2, '0')} / ${Math.floor(duration / 60)}:${String(Math.floor(duration % 60)).padStart(2, '0')}` :
                     'Loading...'}
@@ -209,51 +234,60 @@ export default function Home() {
         </Marquee>
 
         {/* Benefits */}
-        <Row ref={benefitsRef} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 100 : 40 }}>
+        <Row ref={benefitsRef} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 100 : 40, paddingTop: isPageWide ? 60 : 40, backgroundColor: '#FFF1F0' }}>
           <Col xs={12} sm={12} md={12} lg={12} xl={12} style={{ textAlign: 'center' }}>
             <CheckFat size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
             <Heading size={ isPageWide ? '8' : '6' }>Benefits</Heading>
           </Col>
         </Row>
 
-        <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 20 }}>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
-            <Card style={{ padding: 20, height: '100%' }}>
+        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, paddingTop: 20, paddingBottom: 20, paddingBottom: isPageWide ? 100 : 40, backgroundColor: '#FFF1F0' }}>
+          <Col xs={12} sm={6} md={6} lg={5} style={{ padding: 10 }}>
+            <Card style={{ padding: 20, height: '100%', backgroundColor: '#F9F9F9', color: 'black' }}>
               <Calendar size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">Avoid No-Shows</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
-                Prevent missed appointments through automated reminders and follow-ups. Fill cancelled slots quickly with waitlisted patients to maximize schedule efficiency and revenue.
+              <Heading size="5">Avoid No-Shows</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                No-shows cost clinics $200 to $1000+ per visit. Avoid them by activating a phone agent to make reminder calls a few days or hours before appointments.
               </Text>
             </Card>
           </Col>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
-            <Card style={{ padding: 20, height: '100%' }}>
-              <ChartLine size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">Save Staff Time</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
-                Eliminate manual phone tasks through intelligent automation of reminders and scheduling. Let your staff focus on direct patient care and high-value responsibilities.
+          <Col xs={12} sm={6} md={6} lg={5} style={{ padding: 10 }}>
+            <Card style={{ padding: 20, height: '100%', backgroundColor: '#F9F9F9', color: 'black' }}>
+              <Clock size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <Heading size="5">Reduce Staff Overhead</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Staff spend 20+ hours a week sending messages and making calls. Free up valuable staff time activating a team of phone agents so they can focus on direct patient care.
               </Text>
             </Card>
           </Col>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
-            <Card style={{ padding: 20, height: '100%' }}>
+          <Col xs={12} sm={6} md={6} lg={5} style={{ padding: 10 }}>
+            <Card style={{ padding: 20, height: '100%', backgroundColor: '#F9F9F9', color: 'black' }}>
               <ChatCircle size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">Better Patient Relationships</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
-                Enhance patient satisfaction through consistent communication and proactive outreach. Build stronger connections that improve outcomes and long-term retention.
+              <Heading size="5">Better Patient Engagement</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Lack of communication is a common reason patients don't return. Activate a phone agent to make regular reminders, check-ins, and personalized follow-ups that improve long-term health outcomes.
+              </Text>
+            </Card>
+          </Col>
+          <Col xs={12} sm={6} md={6} lg={5} style={{ padding: 10 }}>
+            <Card style={{ padding: 20, height: '100%', backgroundColor: '#F9F9F9', color: 'black' }}>
+              <CurrencyDollar size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <Heading size="5">Boost Organic Revenue</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Insufficient and bad reviews on Google and Yelp reduce organic revenue and referrals. Activate a phone agent to remind patients to leave reviews after appointments.
               </Text>
             </Card>
           </Col>
         </Row>
 
-        {/* Outbound Agents */}
+        {/* Agents */}
         <Row ref={agentsRef} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 100 : 40 }}>
           <Col xs={12} sm={12} md={12} lg={12} xl={12} style={{ textAlign: 'left' }}>
-            <PhoneOutgoing size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-            <Heading size={ isPageWide ? '8' : '6' }>Outbound Agents</Heading>
+            <SquaresFour size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+            <Heading size={ isPageWide ? '8' : '6' }>Agents</Heading>
             <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
               <Col xs={12} sm={10} md={6} lg={5} xl={4} style={{ textAlign: 'left', paddingLeft: 0 }}>
-                <Text size='4' color="gray">Voicebridge's outbound AI phone agents use human-like voice and natural language to conduct calls with your patients with the goal of improving patient engagement and outcomes.</Text>
+                <Text size='4' color="gray">Voicebridge's AI phone agents use human-like voice and natural language to conduct calls with your patients in a conversational manner personalized to the clinic and patient.</Text>
               </Col>
             </Row>
           </Col>
@@ -262,63 +296,141 @@ export default function Home() {
         <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 20 }}>
           <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
+              <Calendar size={32} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <Heading size="5">Appointment Reminder Agent</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Calls patients to remind them about upcoming appointments to avoid no-shows.
+              </Text>
+              <Button onClick={() => {
+                toggleAudio(appointmentReminderAudioRef);
+              }} variant="surface" size="2" style={{ marginTop: 0 }}>
+                {isPlaying && currentAudio === appointmentReminderAudioRef ? 
+                  <Pause size={16} weight="regular" style={{ marginRight: 8 }} /> :
+                  <Play size={16} weight="regular" style={{ marginRight: 8 }} />
+                }
+                Play sample
+              </Button>
+            </Card>
+          </Col>
+          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
+            <Card style={{ padding: 20, height: '100%' }}>
+              <UserCircle size={32} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <Heading size="5">Patient Intake Agent</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Calls patient to collect medical history, symptoms, lifestyle details and insurance coverage.
+              </Text>
+              <Button onClick={() => {
+                toggleAudio(patientIntakeAudioRef);
+              }} variant="surface" size="2" style={{ marginTop: 0 }}>
+                {isPlaying && currentAudio === patientIntakeAudioRef ? 
+                  <Pause size={16} weight="regular" style={{ marginRight: 8 }} /> :
+                  <Play size={16} weight="regular" style={{ marginRight: 8 }} />
+                }
+                Play sample
+              </Button>
+            </Card>
+          </Col>
+          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
+            <Card style={{ padding: 20, height: '100%' }}>
+              <Pill size={32} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <Heading size="5">Medication Reminders Agent</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Calls patients to remind them to take their medication to improve health outcomes.
+              </Text>
+              <Button onClick={() => {
+                toggleAudio(medicationReminderAudioRef);
+              }} variant="surface" size="2" style={{ marginTop: 0 }}>
+                {isPlaying && currentAudio === medicationReminderAudioRef ? 
+                  <Pause size={16} weight="regular" style={{ marginRight: 8 }} /> :
+                  <Play size={16} weight="regular" style={{ marginRight: 8 }} />
+                }
+                Play sample
+              </Button>
+            </Card>
+          </Col>
+          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
+            <Card style={{ padding: 20, height: '100%' }}>
+              <Star size={32} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <Heading size="5">Reviews Reminder Agent</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Calls patients to remind them to leave reviews after appointments, improving clinic reputation.
+              </Text>
+            </Card>
+          </Col>
+          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
+            <Card style={{ padding: 20, height: '100%' }}>
+              <Person size={32} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <Heading size="5">Health Risk Assessments Agent</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Calls patients to run health risk assessments to identify those who may need preventive care.
+              </Text>
+            </Card>
+          </Col>
+          {/* <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
+            <Card style={{ padding: 20, height: '100%' }}>
+              <Question size={32} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <Heading size="5">Patient Satisfaction Agent</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Calls patients to collect feedback on their experience to improve clinic operations.
+              </Text>
+            </Card>
+          </Col> */}
+          {/* <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
+            <Card style={{ padding: 20, height: '100%' }}>
               <Calendar size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              {/* <Image src="/assets/agents/two.jpg" width="100%" style={{ marginBottom: 10 }} /> */}
-              <Heading size="4">Appointment Reminder Agent</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
-                Proactively calls patients about upcoming appointments, reduces no-shows through personalized reminders, and assists with scheduling changes when needed.
+              <Heading size="5">Appointment Rescheduling Agent</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Manages schedule changes by helping patients find convenient alternative appointments.
+              </Text>
+            </Card>
+          </Col> */}
+          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
+            <Card style={{ padding: 20, height: '100%' }}>
+              <CheckCircle size={32} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <Heading size="5">Screening Reminder Agent</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Calls patients to remind them to complete screenings to improve outcomes.
               </Text>
             </Card>
           </Col>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
+          {/* <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
-              <UserCircle size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">Patient Intake Agent</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
-                Streamlines pre-appointment process by collecting patient information, medical history, symptoms, lifestyle details and verifying insurance information.
+              <UserCircleCheck size={32} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <Heading size="5">Condition Check-In Agent</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Calls patients to check in on them, especially those with chronic conditions.
               </Text>
             </Card>
-          </Col>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
-            <Card style={{ padding: 20, height: '100%' }}>
-              <Pill size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">Medication Reminders Agent</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
-                Enhances medication adherence through scheduled reminder calls, tracks patient compliance, and provides support for treatment plan questions.
+          </Col> */}
+        </Row>
+
+        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
+        <Col xs={12} sm={6} md={6} lg={4}style={{ textAlign: 'center' }}>
+            <Card style={{ 
+              padding: '30px',
+              borderRadius: 20,
+              border: '1px solid var(--accent-6)',
+              backgroundColor: 'var(--accent-2)',
+              textAlign: 'center'
+            }}>
+              <Heading size="5">Need a custom agent?</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10, marginBottom: 20 }}>
+                Have a specific workflow in mind? We can build a custom AI phone agent tailored to your clinic's unique needs.
               </Text>
-            </Card>
-          </Col>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
-            <Card style={{ padding: 20, height: '100%' }}>
-              <Person size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">Health Risk Assessments Agent</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
-                Conducts comprehensive health screenings through phone interviews, identifies risk factors, and flags patients who may need preventive care.
-              </Text>
-            </Card>
-          </Col>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
-            <Card style={{ padding: 20, height: '100%' }}>
-              <Question size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">Patient Satisfaction Agent</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
-                Systematically collects patient feedback through post-visit surveys, measures satisfaction levels, and gathers insights for service improvement.
-              </Text>
-            </Card>
-          </Col>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
-            <Card style={{ padding: 20, height: '100%' }}>
-              <Calendar size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">Appointment Rescheduling Agent</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
-                Manages schedule changes efficiently by helping patients find convenient alternative appointments while maintaining clinic scheduling protocols.
-              </Text>
+              <Button 
+                variant="solid" 
+                size="3"
+                onClick={() => window.location.href = 'https://cal.com/voicebridge/30-min'}
+              >
+                <Calendar size={16} weight="bold" style={{ marginRight: 3 }} />
+                Book a demo
+              </Button>
             </Card>
           </Col>
         </Row>
 
         {/* Inbound Agents */}
-        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 100 : 40 }}>
+        {/* <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 100 : 40 }}>
           <Col xs={12} sm={12} md={12} lg={12} xl={12} style={{ textAlign: 'left' }}>
             <PhoneIncoming size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
             <Heading size={ isPageWide ? '8' : '6' }>Inbound Agents</Heading>
@@ -328,14 +440,14 @@ export default function Home() {
               </Col>
             </Row>
           </Col>
-        </Row>
+        </Row> */}
 
-        <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 20 }}>
+        {/* <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 20 }}>
           <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
               <PhoneOutgoing size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">Phone Answering Agent</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
+              <Heading size="5">Phone Answering Agent</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
                 Handles common patient inquiries about billing, insurance, appointments, and clinic policies with accurate, consistent responses available 24/7.
               </Text>
             </Card>
@@ -343,13 +455,13 @@ export default function Home() {
           <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
               <Voicemail size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">After-Hours Agent</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
+              <Heading size="5">After-Hours Agent</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
                 Provides 24/7 coverage for urgent inquiries, routes emergency calls appropriately, and takes detailed messages for non-urgent matters.
               </Text>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
 
         {/* Features */}
         <Row ref={featuresRef} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 100 : 40 }}>
@@ -365,75 +477,84 @@ export default function Home() {
         </Row>
 
         <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 20 }}>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
+          {/* <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
-              <ChatCircle size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">Personalized Conversations</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
-                Human-like conversations that patiently listen and respond to each caller's questions and responses.
+              <ArrowsSplit size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <Heading size="5">Customizable Call Flows</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Customize the call flow to fit your clinic's needs, including the ability to add custom tasks and workflows.
               </Text>
             </Card>
-          </Col>
+          </Col> */}
+          {/* <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
+            <Card style={{ padding: 20, height: '100%' }}>
+              <ChatCircle size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <Heading size="5">Personalized Conversations</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Human-like conversations that patiently listen and respond to each caller's questions and responses while accomplishing the objective of the call.
+              </Text>
+            </Card>
+          </Col> */}
           <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
               <SpeakerHigh size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">Brand-Aligned Voice</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
-                Customize the AI voice to match your clinic's tone and values for a consistent patient experience.
+              <Heading size="5">Brand-Aligned Voice</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Customizable voice and conversation style to match your clinic's tone and values for a consistent patient experience.
               </Text>
             </Card>
           </Col>
           <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
               <Globe size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">Multi-Language Support</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
-                Communicate with patients in their preferred language for better healthcare access and understanding.
+              <Heading size="5">Multi-Language Support</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Multilingual agent voices to communicate with patients in their preferred language for better access and understanding.
               </Text>
             </Card>
           </Col>
           <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
               <Phone size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">Predictive Dialing</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
-                Optimize patient outreach with intelligent call timing and appointment scheduling.
+              <Heading size="5">Predictive Dialing</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Intelligent call timing and appointment scheduling to increase the number of successful calls made to patients.
               </Text>
             </Card>
           </Col>
           <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
               <Plugs size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">Seamless Integrations</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
-                Connect seamlessly with your EHR, Calendar, and other practice management systems.
+              <Heading size="5">Seamless Integrations</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Seamless connections with your EHR, Calendar, and other practice management systems for quick setup and deployment.
               </Text>
             </Card>
           </Col>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
+          {/* <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
               <ShieldCheck size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">DNC Management</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
+              <Heading size="5">DNC Management</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
                 Automatically comply with Do Not Call regulations and patient preferences.
               </Text>
             </Card>
-          </Col>
+          </Col> */}
           <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
               <ChartLine size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">Quality Monitoring</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
-                Review call recordings and performance metrics to continuously improve patient outreach.
+              <Heading size="5">Quality Monitoring</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Availability of call recordings to continuously review agent performance and improve patient communication.
               </Text>
             </Card>
           </Col>
           <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
               <Voicemail size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="4">Voicemail Detection</Heading>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 10 }}>
-                Automatically detect and record voicemails, ensuring no important messages are missed.
+              <Heading size="5">Voicemail Detection</Heading>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Automatic detection and recording of voicemails to ensure no important messages are not missed.
               </Text>
             </Card>
           </Col>
@@ -470,7 +591,7 @@ export default function Home() {
             <Heading size={ isPageWide ? '8' : '6' } style={{ marginTop: 10 }}>Pricing</Heading>
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 20 }}>
               <Col xs={12} sm={11} md={10} lg={8} xl={6} style={{ textAlign: 'center', paddingLeft: 0 }}>
-                <Text size='3' color="gray" as='p'>We offer flexible, risk-free pricing based on the number of calls, the number of integrations, and the complexity of workflows.</Text>
+                <Text size='3' color="gray" as='p'>Sign up for a free trial and get 30 minutes of calls for free. No credit card required. Then choose a plan that fits your needs based on the number of agents and call minutes per month.</Text>
               </Col>
             </Row>
           </Col>
@@ -481,14 +602,14 @@ export default function Home() {
             <Card style={{ padding: 20, height: '100%' }}>
               <Heading size="3" style={{ color: 'tomato' }}>Starter</Heading>
               <Text size="8" as="p" style={{ marginTop: 20, fontFamily: 'Inter Regular' }}>$29</Text>
-              <Text size="2" color="gray" as="p">per month</Text>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 20 }}>
+              <Text size="3" color="gray" as="p">per month</Text>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 20 }}>
                 Perfect for businesses just getting started
               </Text>
-              <Text size="2" color="gray" as="div" style={{ marginTop: 20 }}>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 20 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 30 minutes of calls
               </Text>
-              <Text size="2" color="gray" as="div" style={{ marginTop: 5 }}>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Email & web chat support
               </Text>
               <Button variant="solid" size="2" style={{ marginTop: 40 }} onClick={() => window.location.href = 'https://cal.com/voicebridge/30-min'}>
@@ -500,20 +621,20 @@ export default function Home() {
             <Card style={{ padding: 20, height: '100%' }}>
               <Heading size="3" style={{ color: 'tomato' }}>Growth</Heading>
               <Text size="8" as="p" style={{ marginTop: 20, fontFamily: 'Inter Regular' }}>$99</Text>
-              <Text size="2" color="gray" as="p">per month</Text>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 20 }}>
+              <Text size="3" color="gray" as="p">per month</Text>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 20 }}>
                 For businesses with increasing call volumes
               </Text>
-              <Text size="2" color="gray" as="div" style={{ marginTop: 20 }}>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 20 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 180 minutes of calls
               </Text>
-              <Text size="2" color="gray" as="div" style={{ marginTop: 5 }}>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 1 calendar integration
               </Text>
-              <Text size="2" color="gray" as="div" style={{ marginTop: 5 }}>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Choose your agent's voice
               </Text>
-              <Text size="2" color="gray" as="div" style={{ marginTop: 5 }}>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Email & web chat support
               </Text>
               <Button variant="solid" size="2" style={{ marginTop: 40 }} onClick={() => window.location.href = 'https://cal.com/voicebridge/30-min'}>
@@ -525,26 +646,26 @@ export default function Home() {
             <Card style={{ padding: 20, height: '100%' }}>
               <Heading size="3" style={{ color: 'tomato' }}>Pro</Heading>
               <Text size="8" as="p" style={{ marginTop: 20, fontFamily: 'Inter Regular' }}>$299</Text>
-              <Text size="2" color="gray" as="p">per month</Text>
-              <Text size="2" color="gray" as="p" style={{ marginTop: 20 }}>
+              <Text size="3" color="gray" as="p">per month</Text>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 20 }}>
                 For businesses with very high call volumes
               </Text>
-              <Text size="2" color="gray" as="div" style={{ marginTop: 20 }}>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 20 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 720 minutes of calls
               </Text>
-              <Text size="2" color="gray" as="div" style={{ marginTop: 5 }}>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Up to 3 integrations
               </Text>
-              <Text size="2" color="gray" as="div" style={{ marginTop: 5 }}>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Choose your agent's voice
               </Text>
-              <Text size="2" color="gray" as="div" style={{ marginTop: 5 }}>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> SMS follow-ups
               </Text>
-              <Text size="2" color="gray" as="div" style={{ marginTop: 5 }}>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Save call recordings
               </Text>
-              <Text size="2" color="gray" as="div" style={{ marginTop: 5 }}>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Email & web chat support
               </Text>
               <Button variant="solid" size="2" style={{ marginTop: 40 }} onClick={() => window.location.href = 'https://cal.com/voicebridge/30-min'}>
@@ -556,7 +677,7 @@ export default function Home() {
 
         {/* <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
           <Col xs={12} sm={12} md={12} lg={12} xl={12} style={{ textAlign: 'center' }}>
-            <Text size="2" color="gray" as="div">
+            <Text size="3" color="gray" as="div">
               Need a custom deployment?<br />
               <Button variant="solid" size="2" style={{ marginTop: 20 }} onClick={() => window.location.href = 'https://cal.com/voicebridge/30-min'}>Let's talk</Button>
             </Text>
@@ -574,57 +695,57 @@ export default function Home() {
           <Col xs={12} sm={11} md={10} lg={10} xl={9}>
 
             <Card style={{ padding: 20, marginBottom: 20 }}>
-              <Heading size="4">What scenarios can Voicebridge handle?</Heading>  
-              <Text size="2" color="gray" as="div" style={{ marginTop: 10 }}>
+              <Heading size="5">What scenarios can Voicebridge handle?</Heading>  
+              <Text size="3" color="gray" as="div" style={{ marginTop: 10 }}>
                 Voicebridge can answer questions about your business, schedule appointments, and collect information from callers. Voicebridge can be customized to handle custom workflows unique to your business needs.
               </Text>
             </Card>
 
             <Card style={{ padding: 20, marginBottom: 20 }}>
-              <Heading size="4">What tools does Voicebridge integrate with?</Heading>
-              <Text size="2" color="gray" as="div" style={{ marginTop: 10 }}>
+              <Heading size="5">What tools does Voicebridge integrate with?</Heading>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 10 }}>
                 Voicebridge integrates seamlessly with popular scheduling tools such as Cal.com, Calendly, and Acuity and can be customized to connect to with any other tools such as CRMs and EHRs.
               </Text>
             </Card>
 
             <Card style={{ padding: 20, marginBottom: 20 }}>
-              <Heading size="4">How does Voicebridge handle phone calls?</Heading>
-              <Text size="2" color="gray" as="div" style={{ marginTop: 10 }}>
+              <Heading size="5">How does Voicebridge handle phone calls?</Heading>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 10 }}>
                 Voicebridge uses advanced speech-to-text models and LLM-powered natural language processing to have human-like conversations with callers, understand the caller's intent, answer questions and perform actions.
               </Text>
             </Card>
 
             <Card style={{ padding: 20, marginBottom: 20 }}>
-              <Heading size="4">How long does it take to set up?</Heading>
-              <Text size="2" color="gray" as="div" style={{ marginTop: 10 }}>
+              <Heading size="5">How long does it take to set up?</Heading>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 10 }}>
                 Voicebridge can be configured in 2-3 days for basic use cases but can take longer for custom workflows and integrations.
               </Text>
             </Card>
 
             <Card style={{ padding: 20, marginBottom: 20 }}>
-              <Heading size="4">What happens if Voicebridge can't handle a request?</Heading>
-              <Text size="2" color="gray" as="div" style={{ marginTop: 10 }}>
+              <Heading size="5">What happens if Voicebridge can't handle a request?</Heading>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 10 }}>
                 If Voicebridge is experiencing a scenario that is not covered by it's set of instructions, it can be configured to record the customer's call and let the caller know you'll get back to them as soon as possible.
               </Text>
             </Card>
 
             <Card style={{ padding: 20, marginBottom: 20 }}>
-            <Heading size="4">Is it secure and private?</Heading>
-            <Text size="2" color="gray" as="div" style={{ marginTop: 10 }}>
+            <Heading size="5">Is it secure and private?</Heading>
+            <Text size="3" color="gray" as="div" style={{ marginTop: 10 }}>
               Yes, we take security seriously. All conversations are encrypted, and we comply with industry standards for data protection. You have full control over what information the AI can access and share.
             </Text>
           </Card>
 
             <Card style={{ padding: 20, marginBottom: 20 }}>
-            <Heading size="4">What does it cost?</Heading>
-            <Text size="2" color="gray" as="div" style={{ marginTop: 10 }}>
+            <Heading size="5">What does it cost?</Heading>
+            <Text size="3" color="gray" as="div" style={{ marginTop: 10 }}>
               We offer customized pricing based on your workflows and needs. 
             </Text>
           </Card>
 
             <Card style={{ padding: 20 }}>
-            <Heading size="4">When will I see ROI?</Heading>
-            <Text size="2" color="gray" as="div" style={{ marginTop: 10 }}>
+            <Heading size="5">When will I see ROI?</Heading>
+            <Text size="3" color="gray" as="div" style={{ marginTop: 10 }}>
               You can expect to see ROI within the first month through reduced administrative costs and improved client engagement.
             </Text>
           </Card>
