@@ -20,7 +20,7 @@ export default function Home() {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  const heroAudioRef = useRef(new Audio('/assets/audio/sally-sam-studio-inbound.wav'));
+  const heroAudioRef = useRef(new Audio('/assets/audio/sally-dr-carter-inbound.wav'));
 
   let isPageWide = useMediaQuery('(min-width: 640px)');
   const { theme } = useContext(ThemeContext);
