@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
 import { Row, Col, Image, Navbar, Nav } from 'react-bootstrap';
-import { Badge, Button, Card, Heading, Text } from '@radix-ui/themes';
-import { Calendar, Play, Pause, Waveform, ChatCircle, SpeakerHigh, Globe, Phone, Plugs, ChartLine, Voicemail, UserCircle, Pill, Check, Person, SquaresFour, CheckFat, Link, CurrencyDollar, Clock, Star, CheckCircle, Steps, Checks, QuestionMark, NotePencil, X, ArrowDown, Smiley } from '@phosphor-icons/react';
+import { Badge, Button, Card, Heading, Text, Link } from '@radix-ui/themes';
+import { Calendar, Waveform, SpeakerHigh, Check, CheckFat, CurrencyDollar, Clock, Steps, Checks, QuestionMark, NotePencil, X, ArrowDown, Smiley } from '@phosphor-icons/react';
 import { useMediaQuery } from './shared-functions.js';
 import { ThemeContext } from './Theme.js';
 import Marquee from "react-fast-marquee";
@@ -392,7 +392,7 @@ export default function Home() {
                 Perfect for small clinics or ones just getting started
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 20 }}>
-                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 30 minutes of calls
+                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 10 minutes of calls
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
                 <X size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> No calendar integration
@@ -423,7 +423,7 @@ export default function Home() {
                 For clinics with increasing call volumes
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 20 }}>
-                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 180 minutes of calls
+                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 30 minutes of calls
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 1 calendar integration
@@ -454,10 +454,10 @@ export default function Home() {
                 For clinics with very high call volumes and need to scale
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 20 }}>
-                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 720 minutes of calls
+                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 120 minutes of calls
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
-                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Up to 5 integrations
+                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> All integrations
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Custom voice selection
@@ -572,10 +572,36 @@ export default function Home() {
           </Col>
         </Row>
 
+        {/* Footer Links */}
+        <Row style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginTop: 160, marginBottom: 40 }}>
+          <Col xs={12} md={4} style={{ marginBottom: 20 }}>
+            <img src="/logo.svg" alt="Voicebridge Logo" style={{ height: 30 }} />
+            <Text size="3" color="gray" as="div" style={{ marginTop: 15 }}>
+              The AI phone receptionist for clinics
+            </Text>
+          </Col>
+          
+          <Col xs={12} md={4} style={{ marginBottom: 20 }}>
+            <Text size="3" weight="bold" as="div" style={{ marginBottom: 15 }}>Legal</Text>
+            <Text size="2" color="gray" as='div' style={{ marginBottom: 10 }}><Link href="/assets/policies/privacy_policy.pdf" target="_blank">Privacy Policy</Link></Text>
+            <Text size="2" color="gray" as='div' style={{ marginBottom: 10 }}><Link href="/assets/policies/terms.pdf" target="_blank">Terms of Service</Link></Text>
+          </Col>
+
+          <Col xs={12} md={4} style={{ marginBottom: 20 }}>
+            <Text size="3" weight="bold" as="div" style={{ marginBottom: 15 }}>Contact</Text>
+            <Text size="2" color="gray" as="div" style={{ marginBottom: 10 }}>
+              hello@voicebridgeai.com
+            </Text>
+            <Text size="2" color="gray" as="div">
+              San Francisco, CA
+            </Text>
+          </Col>
+        </Row>
+
         {/* Footer */}
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 100 }}>
           <Col style={{ textAlign: 'center' }}>
-            <Text size='1' color="gray">Copyright 2025, Molecule Climate Inc.</Text>
+            <Text size='1' color="gray" as='div'>Copyright 2025, Molecule Climate Inc.</Text>
           </Col>
         </Row>
 
