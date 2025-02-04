@@ -21,7 +21,7 @@ export default function App() {
 
   return (
     <Router>
-      <Theme accentColor={ theme === 'dark-theme' ? "tomato" : "tomato" } appearance={ theme === 'dark-theme' ? "dark" : "light" }>
+      <Theme accentColor="indigo" appearance={ theme === 'dark-theme' ? "dark" : "light" }>
         <Container className={`App ${theme}`} fluid style={{ marginTop: 0, padding: 0, height: '100%' }}>
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginTop: 0, marginLeft: 0, marginRight: 0 }}>
               <Col style={{ width: '100%', padding: 0, minHeight: '100vh' }}>

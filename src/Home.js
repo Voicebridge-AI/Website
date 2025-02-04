@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
 import { Row, Col, Image, Navbar, Nav } from 'react-bootstrap';
 import { Badge, Button, Card, Heading, Text } from '@radix-ui/themes';
-import { Calendar, Play, Pause, Waveform, ChatCircle, SpeakerHigh, Globe, Phone, Plugs, ChartLine, Voicemail, UserCircle, Pill, Check, Person, SquaresFour, CheckFat, Link, CurrencyDollar, Clock, Star, CheckCircle, Steps } from '@phosphor-icons/react';
+import { Calendar, Play, Pause, Waveform, ChatCircle, SpeakerHigh, Globe, Phone, Plugs, ChartLine, Voicemail, UserCircle, Pill, Check, Person, SquaresFour, CheckFat, Link, CurrencyDollar, Clock, Star, CheckCircle, Steps, Checks, QuestionMark, NotePencil, X, ArrowDown, Smiley } from '@phosphor-icons/react';
 import { useMediaQuery } from './shared-functions.js';
 import { ThemeContext } from './Theme.js';
 import Marquee from "react-fast-marquee";
@@ -101,119 +101,45 @@ export default function Home() {
         </Navbar>
 
         {/* Hero section */}
-        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 20, minHeight: '50vh' }}>
+        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40, minHeight: '50vh' }}>
+          <Col xs={12} sm={11} md={12} lg={12} xl={12} style={{ textAlign: 'center', maxWidth: 1200 }}>
+            <h1>The AI Phone Receptionist for Clinics</h1>
+            <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
+              <Col xs={12} sm={11} md={10} lg={8} xl={6} style={{ textAlign: 'center', padding: 0 }}>
+                <Text size='4' color="gray" as='div' style={{ marginTop: 10 }}>Missed calls cost clinics $300K to $1M annually in lost revenue. Voicebridge ensures every call is answered, especially when you are busy or after hours.</Text>
+                <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 20 }}>
+                  <Text size="3" color="gray" as='div' style={{ marginRight: 10 }}><Checks size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Available 24/7/365</Text>
+                  <Text size="3" color="gray" as='div' style={{ marginLeft: 10 }}><Checks size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Books appointments</Text>
+                </Row>
+                <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 5 }}>
+                  <Text size="3" color="gray" as='div' style={{ marginRight: 10 }}><Checks size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Takes messages</Text>
+                  <Text size="3" color="gray" as='div' style={{ marginLeft: 10 }}><Checks size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Delivers summaries</Text>
+                </Row>
+                <Button variant="solid" size="4" style={{ marginTop: 20 }} onClick={() => window.location.href = 'https://cal.com/voicebridge/30-min'}><Calendar size={18} weight="bold" style={{ marginRight: 0 }} /> Book a demo</Button>
 
-          <Col xs={12} sm={10} md={8} lg={7} xl={7} style={{ textAlign: 'left', maxWidth: 600 }}>
-
-            <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 20 }}>
-              <Col xs={12} sm={12} md={12} lg={12} xl={12} style={{ textAlign: 'left', padding: 0 }}>
-                {/* <Badge size="2" style={{ }}></Badge> */}
-                {/* <Heading size={isPageWide ? '9' : '8'} as='div'>The AI Phone Receptionist for Clinics</Heading> */}
-                <h1>The AI Phone Receptionist for Clinics</h1>
-              </Col>
-            </Row>
-
-            <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
-              <Col xs={12} sm={10} md={10} lg={10} xl={10} style={{ textAlign: 'left', padding: 0 }}>
-                <Text size={isPageWide ? '4' : '3'} color="gray" as='div'>Don't let missed calls cost your business. Voicebridge's AI-powered answering agent ensures every call is answered, especially when you are busy or after hours.</Text>
-                <Text size={isPageWide ? '4' : '3'} color="gray" as='div' style={{ marginTop: 10 }}><Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Available 24/7/365</Text>
-                <Text size={isPageWide ? '4' : '3'} color="gray" as='div' style={{ marginTop: 5 }}><Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Books appointments</Text>
-                <Text size={isPageWide ? '4' : '3'} color="gray" as='div' style={{ marginTop: 5 }}><Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Takes messages</Text>
-                <Text size={isPageWide ? '4' : '3'} color="gray" as='div' style={{ marginTop: 5 }}><Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Delivers summaries</Text>
-              </Col>
-            </Row>
-
-            <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 20 }}>
-              <Col xs={11} sm={10} md={8} lg={8} xl={6} style={{ textAlign: 'left' }}>
-                <Button variant="solid" size={isPageWide ? '4' : '3'} onClick={() => window.location.href = 'https://cal.com/voicebridge/30-min'}><Calendar size={18} weight="bold" style={{ marginRight: 0 }} /> Book a demo</Button>
-
-                <Text size='2' color="gray" as='p' style={{ marginTop: 10 }}>30-minute demo. No commitment.</Text>
-
-              </Col>
-            </Row>
-          </Col>
-
-          <Col xs={12} sm={10} md={8} lg={5} xl={5} style={{ textAlign: 'center', maxWidth: 600 }}>
-            <Card style={{ 
-              marginTop: 20,
-            }}>
-              <Image src="/assets/agents/appointment-reminder-alex.jpg" width="100%" style={{ marginBottom: 15 }} />
-              
-              <Text size='5' as='div' style={{ textAlign: 'center', fontWeight: 'bold' }}>Listen to a sample call</Text>
-              <Text size='2' color="gray" as='div' style={{ textAlign: 'center' }}>Sally, the AI Receptionist</Text>
-
-              <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-                marginTop: 10,
-                width: '100%',
-                backgroundColor: '#FFF1F0',
-                padding: '10px 16px',
-                border: '1px solid var(--accent-6)',
-                borderRadius: '32px'
-              }}>
-                <Button
-                  variant="solid"
-                  size="2"
-                  onClick={() => toggleAudio(heroAudioRef)}
-                  style={{ 
-                    padding: 8,
-                    borderRadius: '50%',
-                    width: 36,
-                    height: 36,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
-                >
-                  {isPlaying && currentAudio === heroAudioRef ? (
-                    <Pause size={18} weight="bold" />
-                  ) : (
-                    <Play size={18} weight="bold" />
-                  )}
-                </Button>
-
-                <div style={{ flex: 1 }}>
-                  <div style={{
-                    height: 4,
-                    background: 'var(--gray-4)',
-                    borderRadius: 2,
-                    position: 'relative',
-                    cursor: 'pointer'
-                  }}
-                    onClick={(e) => {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      const x = e.clientX - rect.left;
-                      const percentage = x / rect.width;
-                      heroAudioRef.current.currentTime = percentage * duration;
-                    }}
+                <Text size='3' as='div' style={{ marginTop: 20 }}>Listen to a sample call</Text>
+                <ArrowDown size={22} weight="bold" style={{ color: 'var(--accent-9)', marginTop: 10, marginBottom: 10 }} />
+                <div style={{
+                  marginTop: 10,
+                }}>
+                  <video
+                    controls
+                    poster="/assets/agents/ai-receptionist-sally.jpg"
+                    controlsList="nodownload noremoteplayback no-picture-in-picture "
+                    width="100%"
+                    style={{ marginBottom: 10 }}
                   >
-                    <div style={{
-                      position: 'absolute',
-                      left: 0,
-                      top: 0,
-                      height: '100%',
-                      width: `${(currentTime / duration) * 100}%`,
-                      background: 'var(--accent-9)',
-                      borderRadius: 2
-                    }} />
-                  </div>
+                    <source src="/assets/audiograms/sally-dr-carter-inbound-audiogram.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
-
-                <Text size="3" style={{ minWidth: 60 }}>
-                  {duration ?
-                    `${Math.floor(currentTime / 60)}:${String(Math.floor(currentTime % 60)).padStart(2, '0')} / ${Math.floor(duration / 60)}:${String(Math.floor(duration % 60)).padStart(2, '0')}` :
-                    'Loading...'}
-                </Text>
-              </div>
-            </Card>
+              </Col>
+            </Row>
           </Col>
-
         </Row>
 
         {/* Social proof - Past experience helping milions of athletes, fitness professionals, and health professionals */}
-        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 20 }}>
+        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
           <Col xs={10} sm={9} md={8} lg={8} xl={8} style={{ padding: 0, textAlign: 'center', maxWidth: 400 }}>
             <Text size='2' color="gray" as='p'>Built by a team that has built multiple health and sports software products benefiting millions of users</Text>
           </Col>
@@ -233,43 +159,72 @@ export default function Home() {
           {/* <Image src="/assets/logos/unbound.png" height="30px" style={{ marginRight: 120 }} /> */}
         </Marquee>
 
-        {/* Benefits */}
-        <Row ref={benefitsRef} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 100 : 40, paddingTop: isPageWide ? 60 : 40, backgroundColor: '#FFF1F0' }}>
+        <Row ref={benefitsRef} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 100 : 40 }}>
           <Col xs={12} sm={12} md={12} lg={12} xl={12} style={{ textAlign: 'center' }}>
             <CheckFat size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-            <h2>Why Voicebridge?</h2>
+            <h6>Benefits of Voicebridge</h6>
+            <h2 style={{ marginTop: 10 }}>Transform Your Clinic's Performance</h2>
           </Col>
         </Row>
 
-        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, backgroundColor: '#FFF1F0', paddingBottom: isPageWide ? 60 : 40 }}>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 20 }}>
-            <Card style={{ padding: 20, height: '100%', backgroundColor: '#F9F9F9', color: 'black' }}>
-              <CurrencyDollar size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <h3>Avoid Lost Revenue</h3>
-              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
-                The average clinic misses 62% of phone calls, with each missed call potentially costing $500-$1,000 in lost revenue. Ensure no potential customer slips through the cracks with our 24/7 call coverage that converts inquiries into appointments.
-              </Text>
-            </Card>
+        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 40 : 40 }}> 
+          <Col xs={12} sm={10} md={8} lg={5} xl={5} style={{ padding: 30 }}>
+            <CurrencyDollar size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+            <h3>Unlock Lost Revenue</h3>
+            <Text size='4' color="gray" as='div'>Missed calls cost clinics $300K to $1M annually in lost revenue. Voicebridge ensures every call is answered, especially when you are busy or after hours.</Text>
+
+            <Clock size={22} weight="regular" style={{ color: 'var(--accent-9)', marginTop: 30, marginBottom: 10 }} />
+            <h3>Increase Productivity</h3>
+            <Text size='4' color="gray" as='div'>Staff spend an average of 3 hours per day handling routine phone calls, costing over $15,000 annually in lost productivity. Voicebridge agents handle inquiries and appointment scheduling while your team focuses on higher-value tasks and patient care.</Text>
+            
+            <Smiley size={22} weight="regular" style={{ color: 'var(--accent-9)', marginTop: 30, marginBottom: 10 }} />
+            <h3>Increase Patient Satisfaction</h3>
+            <Text size='4' color="gray" as='div'>Around 60% of patients abandon calls if wait times exceed one minute, leading to provider switching due to dissatisfaction. Voicebridge ensures every call is answered, especially when you are busy or after hours.</Text>
+
           </Col>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 20 }}>
-            <Card style={{ padding: 20, height: '100%', backgroundColor: '#F9F9F9', color: 'black' }}>
-              <Clock size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <h3>Reduce Costs</h3>
-              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
-                The average clinic spends $36,000 annually on after-hours answering services or staff overtime. Replace expensive staffing with an AI agent that works tirelessly at a fraction of the cost, saving up to 75% on your current phone answering expenses.
-              </Text>
-            </Card>
-          </Col>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 20 }}>
-            <Card style={{ padding: 20, height: '100%', backgroundColor: '#F9F9F9', color: 'black' }}>
-              <Clock size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <h3>Save Time</h3>
-              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
-                Staff spend an average of 3 hours per day handling routine phone calls, costing over $15,000 annually in lost productivity. Let Voicebridge handle basic inquiries and appointment scheduling while your team focuses on higher-value tasks and patient care.
-              </Text>
-            </Card>
+          <Col xs={12} sm={10} md={8} lg={7} xl={5} style={{ textAlign: 'center', padding: 20, background: 'linear-gradient(135deg, #e0f7fa 0%, #e8f5e9 100%)' }}>
+            <Image src="/assets/screenshots/calls.png" style={{ height: '100%', maxHeight: 720 }} />
           </Col>
         </Row>
+
+        {/* Benefits */}
+        {/* <Row ref={benefitsRef} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 100 : 40, paddingTop: isPageWide ? 60 : 40, backgroundColor: 'var(--accent-2)' }}>
+          <Col xs={12} sm={12} md={12} lg={12} xl={12} style={{ textAlign: 'center' }}>
+            <CheckFat size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+            <h6>Benefits of Voicebridge</h6>
+            <h2 style={{ marginTop: 10 }}>Transform Your Clinic's Performance</h2>
+          </Col>
+        </Row> */}
+
+        {/* <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, backgroundColor: 'var(--accent-2)', paddingBottom: isPageWide ? 60 : 40, paddingLeft: isPageWide ? 40 : 0, paddingRight: isPageWide ? 40 : 0 }}>
+          <Col xs={12} sm={6} md={6} lg={6} xl={4} style={{ padding: 20 }}>
+            <Card style={{ padding: 20, height: '100%', backgroundColor: 'var(--accent-2)' }}>
+              <CurrencyDollar size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <h3>Unlock Lost Revenue</h3>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Clinics miss 25% to 62% of phone calls, leading to $300K to $1M in lost revenue. Ensure no potential patients slip through the cracks with Voicebridge's 24/7/365 AI agent that answers calls and books appointments.
+              </Text>
+            </Card>
+          </Col>
+          <Col xs={12} sm={6} md={6} lg={6} xl={4} style={{ padding: 20 }}>
+            <Card style={{ padding: 20, height: '100%', backgroundColor: 'var(--accent-2)' }}>
+              <Clock size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <h3>Increase Productivity</h3>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Staff spend an average of 3 hours per day handling routine phone calls, costing over $15,000 annually in lost productivity. Voicebridge agents handle inquiries and appointment scheduling while your team focuses on higher-value tasks and patient care.
+              </Text>
+            </Card>
+          </Col>
+          <Col xs={12} sm={6} md={6} lg={6} xl={4} style={{ padding: 20 }}>
+            <Card style={{ padding: 20, height: '100%', backgroundColor: 'var(--accent-2)', color: 'black' }}>
+              <Clock size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <h3>Increase Patient Satisfaction</h3>
+              <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
+                Around 60% of patients abandon calls if wait times exceed one minute, leading to provider switching due to dissatisfaction. Voicebridge ensures every call is answered, especially when you are busy or after hours.
+              </Text>
+            </Card>
+          </Col>
+        </Row> */}
 
         {/* Features */}
         <Row ref={featuresRef} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 100 : 80 }}>
@@ -285,48 +240,48 @@ export default function Home() {
         </Row>
 
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 20 }}>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
+          <Col xs={12} sm={6} md={6} lg={5} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
-              <SpeakerHigh size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <h3>Custom Voice & Brand</h3>
+              <NotePencil size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <Heading size="5">Call Summary & Transcripts</Heading>
               <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
-                Choose from multiple AI voices and customize your agent's name and greeting. Create a consistent brand experience that resonates with your callers.
+                Voicebridge automatically generates call summaries and transcripts for every call, allowing you to review, follow-up, and also analyze conversations for training and improvement.
               </Text>
             </Card>
           </Col>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
+          {/* <Col xs={12} sm={6} md={6} lg={5} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
               <ChatCircle size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <Heading size="5">Detailed Message Capture</Heading>
+              <Heading size="5">Message Capture</Heading>
               <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
-                Never miss important caller information with comprehensive message taking. Receive organized summaries directly to your inbox with all relevant details.
+                Every Never miss important caller information with comprehensive message taking. Receive organized summaries  with all relevant details.
               </Text>
             </Card>
-          </Col>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
+          </Col> */}
+          <Col xs={12} sm={6} md={6} lg={5} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
-              <SquaresFour size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <h3>Question Handling</h3>
+              <QuestionMark size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <Heading size="5">Question Handling</Heading>
               <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
-                Automatically respond to common customer inquiries with accurate information. Reduce repetitive calls while ensuring consistent responses to frequently asked questions.
+                Voicebridge automatically responds to common customer inquiries with business information and FAQs provided by your clinic. Reduce repetitive and time-consuming calls while ensuring consistent responses.
               </Text>
             </Card>
           </Col>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
+          <Col xs={12} sm={6} md={6} lg={5} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
               <Calendar size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <h3>Smart Calendar Booking</h3>
+              <Heading size="5">Calendar Booking</Heading>
               <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
-                Let callers schedule appointments directly through your AI agent. Integrates seamlessly with your existing calendar system to prevent double bookings.
+                Let callers schedule appointments directly through your AI agent. Voicebridge integrates seamlessly with your existing calendar system to check for availability and book appointments.
               </Text>
             </Card>
           </Col>
-          <Col xs={12} sm={6} md={6} lg={4} style={{ padding: 10 }}>
+          <Col xs={12} sm={6} md={6} lg={5} style={{ padding: 10 }}>
             <Card style={{ padding: 20, height: '100%' }}>
-              <ChartLine size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
-              <h3>Call Summary & Transcripts</h3>
+              <SpeakerHigh size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+              <Heading size="5">Custom Voice & Brand</Heading>
               <Text size="3" color="gray" as="p" style={{ marginTop: 10 }}>
-                Receive call summaries and transcripts for every call, allowing you to review and analyze conversations for training and improvement.
+                Voicebridge allows you to choose an AI voice and train your agent on your own knowledge base and FAQs. Create a consistent brand experience that resonates with your callers.
               </Text>
             </Card>
           </Col>
@@ -360,7 +315,7 @@ export default function Home() {
         </Row>
 
         {/* How it works */}
-        <Row ref={howItWorksRef} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 100 : 80, paddingTop: isPageWide ? 60 : 40, backgroundColor: '#FFF1F0' }}>
+        <Row ref={howItWorksRef} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 100 : 80, paddingTop: isPageWide ? 60 : 40, backgroundColor: 'var(--accent-2)' }}>
           <Col xs={12} sm={12} md={12} lg={12} xl={12} style={{ textAlign: 'center' }}>
             <Steps size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
             <h2>How it works</h2>
@@ -372,40 +327,40 @@ export default function Home() {
           </Col>
         </Row>
 
-        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, backgroundColor: '#FFF1F0', paddingBottom: isPageWide ? 60 : 40 }}>
+        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, backgroundColor: 'var(--accent-2)', paddingBottom: isPageWide ? 60 : 40 }}>
           <Col xs={12} sm={6} md={5} style={{ padding: 20 }}>
-            <Card style={{ padding: 20, height: '100%', backgroundColor: '#F9F9F9', color: 'black' }}>
-              <Text size="8" as="div" style={{ color: 'tomato', marginBottom: 15 }}>1</Text>
+            <Card style={{ padding: 20, height: '100%', backgroundColor: 'var(--accent-2)' }}>
+              <Text size="8" as="div" style={{ color: 'var(--accent-9)', marginBottom: 15 }}>1</Text>
               <h3>Train your AI agent</h3>
               <Text size="3" color="gray" as="div" style={{ marginTop: 10 }}>
-                Simply provide your website URL and Voicebridge will learn your business basics automatically. You can further customize your AI agent by adding specific answers to common caller questions.
+                Provide your business information including business name, address, hours of operation, services, and common caller questions so Voicebridge agents will answer questions correctly and consistently.
               </Text>
             </Card>
           </Col>
 
           <Col xs={12} sm={6} md={5} style={{ padding: 20 }}>
-            <Card style={{ padding: 20, height: '100%', backgroundColor: '#F9F9F9', color: 'black' }}>
-              <Text size="8" as="div" style={{ color: 'tomato', marginBottom: 15 }}>2</Text>
+            <Card style={{ padding: 20, height: '100%', backgroundColor: 'var(--accent-2)' }}>
+              <Text size="8" as="div" style={{ color: 'var(--accent-9)', marginBottom: 15 }}>2</Text>
               <h3>Configure & connect</h3>
               <Text size="3" color="gray" as="div" style={{ marginTop: 10 }}>
-                Personalize your agent with a custom name and voice, and set up your preferred greeting message. Connect your preferred calendar system to enable seamless appointment scheduling capabilities.
+                Connect your preferred calendar system to enable seamless appointment scheduling capabilities and personalize your agent with a custom name and voice.
               </Text>
             </Card>
           </Col>
 
           <Col xs={12} sm={6} md={5} style={{ padding: 20 }}>
-            <Card style={{ padding: 20, height: '100%', backgroundColor: '#F9F9F9', color: 'black' }}>
-              <Text size="8" as="div" style={{ color: 'tomato', marginBottom: 15 }}>3</Text>
+            <Card style={{ padding: 20, height: '100%', backgroundColor: 'var(--accent-2)' }}>
+              <Text size="8" as="div" style={{ color: 'var(--accent-9)', marginBottom: 15 }}>3</Text>
               <h3>Forward your calls</h3>
               <Text size="3" color="gray" as="div" style={{ marginTop: 10 }}>
-                Set up call forwarding to Voicebridge for when you're unavailable or after business hours. The process is quick and compatible with any existing phone system you currently use.
+                Set up call forwarding to Voicebridge for when you are unavailable or after business hours. The process is quick and compatible with any existing phone system you currently use.
               </Text>
             </Card>
           </Col>
 
           <Col xs={12} sm={6} md={5} style={{ padding: 20 }}>
-            <Card style={{ padding: 20, height: '100%', backgroundColor: '#F9F9F9', color: 'black' }}>
-              <Text size="8" as="div" style={{ color: 'tomato', marginBottom: 15 }}>4</Text>
+            <Card style={{ padding: 20, height: '100%', backgroundColor: 'var(--accent-2)' }}>
+              <Text size="8" as="div" style={{ color: 'var(--accent-9)', marginBottom: 15 }}>4</Text>
               <h3>Let AI handle calls</h3>
               <Text size="3" color="gray" as="div" style={{ marginTop: 10 }}>
                 Your AI agent professionally answers all incoming calls by taking messages, answering questions, and scheduling appointments. Each conversation is documented with summaries, transcripts and recordings for your review.
@@ -434,10 +389,22 @@ export default function Home() {
               <Text size="8" as="div" style={{ marginTop: 20 }}>$29</Text>
               <Text size="3" color="gray" as="div">per month</Text>
               <Text size="4" weight="medium" as="div" style={{ marginTop: 10 }}>
-                Perfect for businesses just getting started
+                Perfect for small clinics or ones just getting started
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 20 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 30 minutes of calls
+              </Text>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
+                <X size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> No calendar integration
+              </Text>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
+                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Basic voice selection
+              </Text>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
+                <X size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> No follow-ups
+              </Text>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
+                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 7-day call recordings
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Email & web chat support
@@ -453,7 +420,7 @@ export default function Home() {
               <Text size="8" as="div" style={{ marginTop: 20 }}>$99</Text>
               <Text size="3" color="gray" as="div">per month</Text>
               <Text size="4" weight="medium" as="div" style={{ marginTop: 10 }}>
-                For businesses with increasing call volumes
+                For clinics with increasing call volumes
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 20 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 180 minutes of calls
@@ -462,7 +429,13 @@ export default function Home() {
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 1 calendar integration
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
-                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Choose your agent's voice
+                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Basic voice selection
+              </Text>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
+                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> SMS or email follow-ups
+              </Text>
+              <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
+                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 30-day call recordings
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Email & web chat support
@@ -478,22 +451,22 @@ export default function Home() {
               <Text size="8" as="div" style={{ marginTop: 20 }}>$299</Text>
               <Text size="3" color="gray" as="div">per month</Text>
               <Text size="4" weight="medium" as="div" style={{ marginTop: 10 }}>
-                For businesses with very high call volumes
+                For clinics with very high call volumes and need to scale
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 20 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 720 minutes of calls
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
-                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Up to 3 integrations
+                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Up to 5 integrations
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
-                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Choose your agent's voice
+                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Custom voice selection
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
-                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> SMS follow-ups
+                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> SMS or email follow-ups
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
-                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Save call recordings
+                <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> 1-year call recordings
               </Text>
               <Text size="3" color="gray" as="div" style={{ marginTop: 5 }}>
                 <Check size={14} weight="bold" style={{ marginBottom: 3, marginRight: 5 }} /> Email & web chat support
@@ -518,14 +491,14 @@ export default function Home() {
             <Card style={{ padding: 20, marginBottom: 20 }}>
               <h4>What is Voicebridge?</h4>  
               <Text size="3" color="gray" as="div" style={{ marginTop: 10 }}>
-                Voicebridge is an AI-powered phone answering agent that handles calls when you're busy, unavailable, or after business hours.
+                Voicebridge is an AI-powered phone answering agent that handles incoming calls from current and potential patients when you are busy, unavailable, or after business hours.
               </Text>
             </Card>
 
             <Card style={{ padding: 20, marginBottom: 20 }}>
               <h4>Who is Voicebridge for?</h4>
               <Text size="3" color="gray" as="div" style={{ marginTop: 10 }}>
-                Voicebridge is designed for small and medium-sized health clinics, therapist offices, and similar businesses that want to ensure they never miss an important call.
+                Voicebridge is designed for small and medium-sized health clinics, therapist offices, telehealth providers, and similar businesses that want to ensure they never miss an important call.
               </Text>
             </Card>
 
@@ -539,7 +512,7 @@ export default function Home() {
             <Card style={{ padding: 20, marginBottom: 20 }}>
               <h4>How does Voicebridge handle appointment scheduling?</h4>
               <Text size="3" color="gray" as="div" style={{ marginTop: 10 }}>
-                Voicebridge can integrate with your calendar to allow callers to book appointments directly.
+                Voicebridge can integrate with calendars and EHRs to allow callers to book appointments directly.
               </Text>
             </Card>
 
@@ -587,7 +560,7 @@ export default function Home() {
             <h2>Ready to transform your phone handling?</h2>
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 0 }}>
               <Col xs={12} sm={10} md={9} lg={8} xl={8} style={{ textAlign: 'center' }}>
-                <Text size={isPageWide ? "4" : "3"} color="gray" as='div'>Don't miss out on opportunities. Voicebridge is your AI-powered partner in delivering exceptional customer service.</Text>
+                <Text size={isPageWide ? "4" : "3"} color="gray" as='div'>Don't miss out on opportunities. Voicebridge is your AI-powered partner in delivering exceptional reception and patient engagement - at a fraction of the cost of other services.</Text>
                 <Button variant="solid" size="4" style={{ marginTop: 40 }} onClick={() => window.location.href = 'https://cal.com/voicebridge/30-min'}>
                   <Calendar size={20} weight="bold" style={{ color: 'white' }} /> Book a demo
                 </Button>
