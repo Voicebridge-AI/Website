@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
 import { Row, Col, Image, Navbar, Nav } from 'react-bootstrap';
 import { Badge, Button, Card, Heading, Text, Link } from '@radix-ui/themes';
-import { Calendar, Waveform, SpeakerHigh, Check, CheckFat, CurrencyDollar, Clock, Steps, Checks, QuestionMark, NotePencil, X, ArrowDown, Smiley } from '@phosphor-icons/react';
+import { Calendar, Waveform, SpeakerHigh, Check, CheckFat, CurrencyDollar, Clock, Steps, Checks, QuestionMark, NotePencil, X, ArrowDown, Smiley, Pause, Headset, Play } from '@phosphor-icons/react';
 import { useMediaQuery } from './shared-functions.js';
 import { ThemeContext } from './Theme.js';
 import Marquee from "react-fast-marquee";
@@ -20,7 +20,7 @@ export default function Home() {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  const heroAudioRef = useRef(new Audio('/assets/audio/sally-dr-carter-inbound.wav'));
+  const heroAudioRef = useRef(new Audio('/assets/audio/molly-acme-clinic-inbound.wav'));
 
   let isPageWide = useMediaQuery('(min-width: 640px)');
   const { theme } = useContext(ThemeContext);
@@ -32,27 +32,16 @@ export default function Home() {
     });
   };
 
-  const toggleAudio = (audioRef) => {
-    // If this is the currently playing audio, toggle play/pause
-    if (currentAudio === audioRef) {
-      if (isPlaying) {
-        audioRef.current.pause();
+  const toggleAudio = () => {
+    if (isPlaying) {
+      heroAudioRef.current.pause();
+    } else {
+      heroAudioRef.current.play().catch(error => {
+        console.error("Error playing audio:", error);
         setIsPlaying(false);
-      } else {
-        audioRef.current.play();
-        setIsPlaying(true);
-      }
+      });
     }
-    // Otherwise just play the new audio
-    else {
-      // Pause currently playing audio if any
-      if (currentAudio) {
-        currentAudio.current.pause();
-      }
-      audioRef.current.play();
-      setIsPlaying(true);
-      setCurrentAudio(audioRef);
-    }
+    setIsPlaying(!isPlaying);
   };
 
   useEffect(() => {
@@ -102,6 +91,66 @@ export default function Home() {
 
         {/* Hero section */}
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40, minHeight: '50vh' }}>
+          <Col xs={12} sm={11} md={8} lg={6} xl={5} style={{ textAlign: 'left', maxWidth: 1200, marginBottom: 20 }}>
+            <h1>The AI Phone Receptionist for Clinics</h1>
+            <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
+              <Col xs={12} sm={11} md={10} lg={10} xl={10} style={{ textAlign: 'left', padding: 0 }}>
+                <Text size='4' color="gray" as='div' style={{ marginTop: 10 }}>Missed calls cost clinics $300K to $1M annually in lost revenue. Voicebridge ensures every call is answered, especially when you are busy or after hours.</Text>
+                <Text size="3" color="gray" as='div' style={{ marginTop: 10 }}><Checks size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Available 24/7/365</Text>
+                <Text size="3" color="gray" as='div'><Checks size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Books appointments</Text>
+                <Text size="3" color="gray" as='div'><Checks size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Takes messages</Text>
+                <Text size="3" color="gray" as='div'><Checks size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Delivers summaries</Text>
+                <Button variant="solid" size="4" style={{ marginTop: 20 }} onClick={() => window.location.href = 'https://cal.com/voicebridge/30-min'}><Calendar size={18} weight="bold" style={{ marginRight: 0 }} /> Book a demo</Button>
+              </Col>
+            </Row>
+          </Col>
+          <Col xs={12} sm={11} md={8} lg={6} xl={6} style={{ 
+            width: '100%',
+            minHeight: 600,
+            maxWidth: 600,
+            background: 'linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4)',
+            borderRadius: '8px',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            padding: 20,
+            position: 'relative'
+          }}>
+          <Image 
+            src="/assets/agents/review-reminder-reema.jpg" 
+            alt="AI Assistant" 
+            style={{ 
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              padding: 20
+            }} 
+          />
+          <div style={{
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 2,
+            textAlign: 'center',
+            width: '80%'
+          }}>
+            <Button variant="solid" style={{ backgroundColor: 'white', color: 'black' }} size="4" onClick={toggleAudio}>
+              {isPlaying ? (
+                <Pause size={20} weight="bold" style={{ color: 'black' }} />
+              ) : (
+                <Play size={20} weight="bold" style={{ color: 'black' }} />
+              )}
+              {isPlaying ? 'Pause' : 'Play sample call'}
+            </Button>
+            {/* <Text size='3' as='div' style={{ marginTop: 10, color: 'black' }}>You will talk to Lisa, a demo AI receptionist.</Text> */}
+          </div>
+        </Col>
+        </Row>
+
+        {/* Hero section */}
+        {/* <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40, minHeight: '50vh' }}>
           <Col xs={12} sm={11} md={12} lg={12} xl={12} style={{ textAlign: 'center', maxWidth: 1200 }}>
             <h1>The AI Phone Receptionist for Clinics</h1>
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
@@ -136,7 +185,7 @@ export default function Home() {
               </Col>
             </Row>
           </Col>
-        </Row>
+        </Row> */}
 
         {/* Social proof - Past experience helping milions of athletes, fitness professionals, and health professionals */}
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
@@ -164,6 +213,11 @@ export default function Home() {
             <CheckFat size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
             <h6>Benefits of Voicebridge</h6>
             <h2 style={{ marginTop: 10 }}>Transform Your Clinic's Performance</h2>
+            <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
+              <Col xs={12} sm={10} md={6} lg={5} xl={4} style={{ textAlign: 'center', paddingLeft: 0 }}>
+                <Text size='4' color="gray">Avoid missed calls, increase patient satisfaction, and boost productivity.</Text>
+              </Col>
+            </Row>
           </Col>
         </Row>
 
@@ -172,19 +226,36 @@ export default function Home() {
             <CurrencyDollar size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
             <h3>Unlock Lost Revenue</h3>
             <Text size='4' color="gray" as='div'>Missed calls cost clinics $300K to $1M annually in lost revenue. Voicebridge ensures every call is answered, especially when you are busy or after hours.</Text>
-
-            <Clock size={22} weight="regular" style={{ color: 'var(--accent-9)', marginTop: 30, marginBottom: 10 }} />
-            <h3>Increase Productivity</h3>
-            <Text size='4' color="gray" as='div'>Staff spend an average of 3 hours per day handling routine phone calls, costing over $15,000 annually in lost productivity. Voicebridge agents handle inquiries and appointment scheduling while your team focuses on higher-value tasks and patient care.</Text>
-            
-            <Smiley size={22} weight="regular" style={{ color: 'var(--accent-9)', marginTop: 30, marginBottom: 10 }} />
-            <h3>Increase Patient Satisfaction</h3>
-            <Text size='4' color="gray" as='div'>Around 60% of patients abandon calls if wait times exceed one minute, leading to provider switching due to dissatisfaction. Voicebridge ensures every call is answered, especially when you are busy or after hours.</Text>
-
           </Col>
           <Col xs={12} sm={10} md={8} lg={7} xl={5} style={{ textAlign: 'center', padding: 20, background: 'linear-gradient(135deg, #e0f7fa 0%, #e8f5e9 100%)' }}>
-            <Image src="/assets/screenshots/calls.png" style={{ height: '100%', maxHeight: 720 }} />
+            <Image src="/assets/screenshots/calls.png" style={{ width: '100%', objectFit: 'contain' }} />
           </Col>
+        </Row>
+
+        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 80 : 40 }}> 
+          <Col xs={12} sm={10} md={8} lg={7} xl={5} style={{ textAlign: 'center', padding: 20, background: 'linear-gradient(135deg, #e0f7fa 0%, #e8f5e9 100%)' }}>
+            <Image src="/assets/screenshots/call-details.png" style={{ width: '100%', objectFit: 'contain' }} />
+          </Col>
+          <Col xs={12} sm={10} md={8} lg={5} xl={5} style={{ padding: 30 }}>
+
+<Clock size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+<h3>Increase Productivity</h3>
+<Text size='4' color="gray" as='div'>Staff spend an average of 3 hours per day handling routine phone calls, costing over $15,000 annually in lost productivity. Voicebridge agents handle inquiries and appointment scheduling while your team focuses on higher-value tasks and patient care.</Text>
+
+</Col>
+        </Row>
+
+        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 80 : 40 }}> 
+          <Col xs={12} sm={10} md={8} lg={5} xl={5} style={{ padding: 30, textAlign: 'center' }}>
+
+          <Smiley size={22} weight="regular" style={{ color: 'var(--accent-9)', marginBottom: 10 }} />
+            <h3>Increase Patient Satisfaction</h3>
+            <Text size='4' color="gray" as='div'>Around 60% of patients abandon calls if wait times exceed one minute, leading to provider switching due to dissatisfaction. Voicebridge ensures every call is answered, especially when you are busy or after hours.</Text>
+          
+          </Col>
+          {/* <Col xs={12} sm={10} md={8} lg={7} xl={5} style={{ textAlign: 'center', padding: 20, background: 'linear-gradient(135deg, #e0f7fa 0%, #e8f5e9 100%)' }}>
+            <Image src="/assets/screenshots/calls.png" style={{ width: '100%', objectFit: 'contain' }} />
+          </Col> */}
         </Row>
 
         {/* Benefits */}
