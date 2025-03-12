@@ -6,7 +6,7 @@ export default function FAQItem({ question, answer }) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <Card style={{ padding: 20, marginBottom: 20 }}>
+        <Card style={{ padding: 20, marginTop: 20 }}>
             <div 
                 onClick={() => setIsOpen(!isOpen)} 
                 style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}

@@ -5,7 +5,7 @@
   },
   "hosting": {
     "public": "build",
-    "site": "voicebridge-app",
+    "site": "voicebridge-website",
     "ignore": [
       "firebase.json",
       "**/.*",

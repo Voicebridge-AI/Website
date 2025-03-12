@@ -1,27 +1,18 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
 import { Row, Col, Image, Navbar, Nav } from 'react-bootstrap';
-import { Badge, Button, Card, Heading, Text, Link } from '@radix-ui/themes';
-import { Calendar, Check, CheckFat, CurrencyDollar, Clock, Pause, Headset, Play, Voicemail, User, SquaresFour, QuestionMark, Checks, X, Steps, ChatCentered } from '@phosphor-icons/react';
-import { useMediaQuery } from './shared-functions.js';
-import { ThemeContext } from './Theme.js';
+import { Badge, Button, Text } from '@radix-ui/themes';
+import { Calendar, Pause, Play, Checks } from '@phosphor-icons/react';
+import { useMediaQuery } from '../shared-functions.js';
+import { ThemeContext } from '../Theme.js';
 import Marquee from "react-fast-marquee";
-import { faqItems } from './config/faqs.js';
-import FAQItem from './components/FaqItem.js';
 
 export default function Home() {
 
-  const useCasesRef = useRef(null);
-  const benefitsRef = useRef(null);
-  const integrationsRef = useRef(null);
-  const faqRef = useRef(null);
-  const howItWorksRef = useRef(null);
-  const pricingRef = useRef(null);
-  const industriesRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  const heroAudioRef = useRef(new Audio('/assets/audio/fundraiser-donation.wav'));
+  const heroAudioRef = useRef(new Audio('/assets/audio/phone-screen-construction-kevin.wav'));
 
   let isPageWide = useMediaQuery('(min-width: 640px)');
   const { theme } = useContext(ThemeContext);
@@ -88,15 +79,17 @@ export default function Home() {
         {/* Hero section */}
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40, minHeight: '50vh' }}>
           <Col xs={12} sm={11} md={11} lg={6} xl={6} style={{ textAlign: 'left', maxWidth: 800, marginBottom: 20, padding: isPageWide ? 30 : 0 }}>
-            <Badge size="3" variant="soft" color="green" style={{ marginBottom: 10 }}>No more missed calls. No more manual calling.</Badge>
-            <h1 style={{ marginTop: 5 }}>Automate customer phone calls with AI agents</h1>
+            <Badge size="3" variant="soft" color="green" style={{ marginBottom: 10 }}>No more manual calling.</Badge>
+            <h1 style={{ marginTop: 5 }}>Automate frontline hiring with AI phone interviewers</h1>
             <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
               <Col xs={12} sm={11} md={10} lg={10} xl={10} style={{ textAlign: 'left', padding: 0 }}>
                 
-                <Text size='4' color="gray" as='div' style={{ marginTop: 10 }}>Deploy no-code AI phone agents for customer outreach and inbound calls. Stop spending hours calling manually or lose substantial revenue opportunities due to missed calls.</Text>
+                <Text size='5' color="gray" as='div' style={{ marginTop: 10 }}>Human-like AI phone agents conduct screener interviews to instantly gather answers to your hiring questions.</Text>
                 
                 <Text size="3" color="gray" as='div' style={{ marginTop: 16 }}><Checks size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Available 24/7/365</Text>
-                <Text size="3" color="gray" as='div'><Checks size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Easy integrations</Text>
+                
+                <Text size="3" color="gray" as='div'><Checks size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Instant call back to applicants</Text>
+                <Text size="3" color="gray" as='div'><Checks size={14} weight="bold" style={{ marginBottom: 3, marginRight: 3 }} /> Easy ATS integrations</Text>
                 
                 <Button variant="solid" size="4" style={{ marginTop: 24 }} onClick={() => window.location.href = 'https://cal.com/voicebridge/30-min'}><Calendar size={18} weight="bold" style={{ marginRight: 0 }} /> Book a demo</Button>
               </Col>

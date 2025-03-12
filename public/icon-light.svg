@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="71px" height="62px" viewBox="0 0 71 62" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Group</title>
+<svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Combined Shape Copy</title>
     <g id="Brand" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Artboard-Copy-6" transform="translate(-18.000000, -23.000000)" fill="#FFFFFF">
-            <g id="Group" transform="translate(18.000000, 23.000000)">
-                <polygon id="Path-3" points="7.81597009e-14 2.84217094e-14 20.3265888 2.84217094e-14 40.6531776 61.7437485 20.3265888 61.7437485"></polygon>
-                <polygon id="Path-3-Copy-2" transform="translate(50.180247, 14.926829) scale(-1, 1) translate(-50.180247, -14.926829) " points="29.8536585 6.75015599e-14 50.1802473 6.75015599e-14 70.5068361 29.8536585 50.1802473 29.8536585"></polygon>
-                <polygon id="Path-3-Copy-8" transform="translate(50.180247, 45.658537) scale(1, -1) translate(-50.180247, -45.658537) " points="29.8536585 29.8536585 50.1802473 29.8536585 70.5068361 61.4634146 50.1802473 61.4634146"></polygon>
+        <g id="Artboard" transform="translate(-29.000000, -354.000000)" fill="#007AFF">
+            <g id="Group-4-Copy-2" transform="translate(29.000000, 354.000000)">
+                <path d="M46,0 C50.418278,0 54,3.581722 54,8 L54,46 C54,50.418278 50.418278,54 46,54 L8,54 C3.581722,54 0,50.418278 0,46 L0,8 C0,3.581722 3.581722,8.8817842e-16 8,0 L46,0 Z M27.184315,34.9832992 L24.301315,26.2552992 L32.8167981,26.2559055 L41.4595996,13.6062992 L32.8167981,13.6062992 L24.259315,26.1292992 L20.1231165,13.6062992 L11.480315,13.6062992 L20.1231165,39.7683895 L28.765918,39.7683895 L28.726315,39.6492992 L32.8167981,39.6496063 L41.4595996,26.2559055 L32.8167981,26.2559055 L27.184315,34.9832992 Z" id="Combined-Shape-Copy"></path>
             </g>
         </g>
     </g>
