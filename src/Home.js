@@ -82,10 +82,11 @@ export default function Home() {
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
           <Col xs={12} sm={11} md={10} style={{ textAlign: 'center', maxWidth: 800, marginBottom: 20, padding: isPageWide ? 30 : 0 }}>
             <Badge size="3" variant="soft" color="green" style={{ marginBottom: 10 }}>No more tedious forms. No more superficial answers.</Badge>
-            <h1 style={{ marginTop: 5 }}>Capture authentic insights with conversational AI voice surveys</h1>
+            {/* <h1 style={{ marginTop: 5 }}>Capture authentic insights with conversational AI voice surveys</h1> */}
+            <h1 style={{ marginTop: 5 }}>Traditional, rigid surveys are out. Conversational AI surveys are in.</h1>
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
               <Col xs={12} sm={11} md={10} lg={10} xl={10} style={{ textAlign: 'center', padding: 0 }}>
-                <Text size='4' color="gray" as='div' style={{ marginTop: 10 }}>Human-like voice agents use natural language to conduct conversational surveys, allowing respondents to share their real thoughts effortlessly and authentically.</Text>
+                <Text size='4' color="gray" as='div' style={{ marginTop: 10 }}>Capture authentic insights with conversational AI voice surveys conducted by human-like voice agents. Allow respondents to share their real thoughts effortlessly and authentically.</Text>
                 <Button variant="solid" size="3" style={{ marginTop: 24 }} onClick={() => window.location.href = 'https://cal.com/voicebridge/30-min'}><Calendar size={18} weight="bold" style={{ marginRight: 0 }} /> Book a demo</Button>
               </Col>
             </Row>
@@ -109,7 +110,7 @@ export default function Home() {
         {/* Benefit: Better response rates */}
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
           <Col xs={12} sm={11} md={6} style={{ textAlign: 'left', maxWidth: 1200, marginBottom: 20, padding: isPageWide ? 30 : 0 }}>
-            <h2>2X higher completion rates</h2>
+            <h1>Get up to two times higher completion rates</h1>
             <Text size='4' color="gray" as='div' style={{ marginTop: 10 }}>
               Traditional online surveys often see abandonment rates between 40% to 55%. In contrast, AI-enhanced surveys can achieve completion rates of 70% to 80%, attributed to personalized and engaging experiences.
             </Text>
@@ -125,13 +126,13 @@ export default function Home() {
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
           <Col xs={12} sm={11} md={6} style={{ textAlign: 'left', marginBottom: 20, padding: isPageWide ? 30 : 0 }}>
             <div style={{ padding: 20, background: 'linear-gradient(135deg, #E6E6FA 0%, #E0FFFF 50%, #FAF0E6 100%)', display: 'flex', justifyContent: 'flex-start' }}>
-              <Image src="/assets/screenshots/nps-survey-record-results.png" style={{ height: '100%', width: '100%', objectFit: 'cover', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }} />
+            <Image src="/assets/screenshots/nps-survey-results-details.png" style={{ height: '100%', width: '100%', objectFit: 'cover', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }} />
             </div>
           </Col>
           <Col xs={12} sm={11} md={6} style={{ textAlign: 'left', marginBottom: 20, padding: isPageWide ? 30 : 0 }}>
-            <h2>Enhanced engagement</h2>
+            <h1>Uncover the real story behind every response</h1>
             <Text size='4' color="gray" as='div' style={{ marginTop: 10 }}>
-              Rigid multiple-choice formats miss emotional context and behavioral nuance, while recall bias affects 27% of responses according to Forsta's 2024 engagement study. Conversational AI surveys create interactive dialogues, leading to higher respondent engagement and more detailed responses.
+              Rigid multiple-choice formats completely miss emotional context and behavioral nuance, while editing and recall biases prevent respondents from being their authentic selves. Conversational AI surveys create interactive dialogues, leading to higher respondent engagement and more detailed responses.
             </Text>
           </Col>
         </Row>
@@ -139,21 +140,21 @@ export default function Home() {
         {/* Benefit: Data processing and analysis */}
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
           <Col xs={12} sm={11} md={6} style={{ textAlign: 'left', maxWidth: 1200, marginBottom: 20, padding: isPageWide ? 30 : 0 }}>
-            <h2>High data processing efficiency</h2>
+            <h1>Receive instant, multi-dimensional analysis</h1>
             <Text size='4' color="gray" as='div' style={{ marginTop: 10 }}>
               Manual analysis of open-ended responses consumes 34% of researcher time, delaying insights in fast-moving markets. In contrast, conversational AI surveys can process transcribed responses to extract answers and insights instantly. 
             </Text>
           </Col>
           <Col xs={12} sm={11} md={6} style={{ textAlign: 'left', marginBottom: 20, padding: isPageWide ? 30 : 0 }}>
             <div style={{ padding: 20, background: 'linear-gradient(135deg, #e0f7fa 0%, #e8f5e9 50%, #fff9c4 100%)', display: 'flex', justifyContent: 'flex-start' }}>
-              <Image src="/assets/screenshots/nps-survey-results-details.png" style={{ height: '100%', width: '100%', objectFit: 'cover', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }} />
+              <Image src="/assets/screenshots/nps-survey-record-results.png" style={{ height: '100%', width: '100%', objectFit: 'cover', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }} />
             </div>
           </Col>
         </Row>
 
         {/* Traditional surveys, a thing of the past */}
         {/* TODO: Insert image of bored person filling out a survey */}
-        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
+        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 80 }}>
           <Col xs={12} sm={11} md={12} style={{ textAlign: 'left', maxWidth: 1200, marginBottom: 20, padding: isPageWide ? 30 : 0 }}>
             <h1>Break free from archaic form-based surveys</h1>
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 60 }}>
