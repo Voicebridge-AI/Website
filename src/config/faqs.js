@@ -22,7 +22,7 @@ export const faqItems = [
     },
     {
       question: "What kind of insights does Voicebridge generate?",
-      answer: "Voicebridge automatically generates comprehensive analysis including sentiment scoring, theme identification, key quotes, and structured data outputs. It can identify patterns across responses, flag critical feedback, and provide both high-level summaries and detailed response breakdowns. All conversations are transcribed and can be analyzed for deeper insights."
+      answer: "Voicebridge automatically generates comprehensive analysis including summaries, answers to your survey questions, overall sentiment, and a constantly growing list of linguistic insights such as enthusiasm, certainty, etc. It also pulls in answers to common questions such as 'What are the key themes in this conversation?', 'What are the most common words used?', etc."
     },
     {
       question: "How customizable are the surveys?",
@@ -30,7 +30,7 @@ export const faqItems = [
     },
     {
       question: "Is Voicebridge secure and confidential?",
-      answer: "Yes, Voicebridge prioritizes data security and privacy. All conversations are encrypted, and data handling follows industry best practices. You can set data retention policies, anonymization rules, and access controls to protect sensitive information."
+      answer: "Yes, Voicebridge prioritizes data security and privacy. All conversations are encrypted, and data handling follows industry best practices. We can help you set data retention policies, anonymization rules, and access controls to protect sensitive information."
     },
     {
       question: "How do I get started with Voicebridge?",

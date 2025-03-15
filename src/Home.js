@@ -10,17 +10,15 @@ import FaqItem from './components/FaqItem.js';
 
 export default function Home() {
 
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-
-  const heroAudioRef = useRef(new Audio('/assets/audio/phone-screen-construction-kevin.wav'));
-
   let isPageWide = useMediaQuery('(min-width: 640px)');
   const { theme } = useContext(ThemeContext);
 
+  const howItWorksRef = useRef(null);
+  const useCasesRef = useRef(null);
+  const faqsRef = useRef(null);
+
   useEffect(() => {
-    // window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }, []);
 
   const scrollEffect = (ref) => {
@@ -30,63 +28,32 @@ export default function Home() {
     });
   };
 
-  const toggleAudio = () => {
-    if (isPlaying) {
-      heroAudioRef.current.pause();
-    } else {
-      heroAudioRef.current.play().catch(error => {
-        console.error("Error playing audio:", error);
-        setIsPlaying(false);
-      });
-    }
-    setIsPlaying(!isPlaying);
-  };
-
-  useEffect(() => {
-    return () => {
-      heroAudioRef.current.pause();
-      heroAudioRef.current.currentTime = 0;
-    };
-  }, []);
-
-  useEffect(() => {
-    const audio = heroAudioRef.current;
-
-    audio.addEventListener('timeupdate', () => setCurrentTime(audio.currentTime));
-    audio.addEventListener('loadedmetadata', () => setDuration(audio.duration));
-
-    return () => {
-      audio.removeEventListener('timeupdate', () => setCurrentTime(audio.currentTime));
-      audio.removeEventListener('loadedmetadata', () => setDuration(audio.duration));
-    };
-  }, []);
-
   return (
 
     <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 50 }}>
 
       <Col xs={12} sm={12} md={12} lg={11} xl={11} style={{ padding: 20 }}>
 
-        <Navbar justify="true" fixed="top" variant={theme === 'light-theme' ? "light" : "dark"} style={{ padding: '10px 10px', backgroundColor: 'rgba(255, 255, 255, 1.0)' }}>
-          <Image src="/logo.svg" alt="Voicebridge" width={isPageWide ? 160 : 160} style={{ marginLeft: 10 }} />
-          {/* <Nav className="ml-auto" style={{ marginRight: 0 }}>
+        <Navbar justify="true" fixed="top" variant={theme === 'light-theme' ? "light" : "dark"} style={{ padding: '5px 10px', backgroundColor: 'rgba(255, 255, 255, 1.0)' }}>
+          <Image src="/logo.svg" alt="Voicebridge" width={isPageWide ? 160 : 140} style={{ marginLeft: 5, cursor: 'pointer' }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
+          <Nav className="ml-auto" style={{ marginRight: 0 }}>
             <Nav.Link onClick={() => scrollEffect(useCasesRef)}>Use cases</Nav.Link>
-            {isPageWide && <Nav.Link onClick={() => scrollEffect(benefitsRef)}>Benefits</Nav.Link>}
-            {isPageWide && <Nav.Link onClick={() => scrollEffect(industriesRef)}>Industries</Nav.Link>}
-            {isPageWide && <Nav.Link onClick={() => scrollEffect(howItWorksRef)}>How it works</Nav.Link>}
-            <Nav.Link onClick={() => scrollEffect(pricingRef)}>Pricing</Nav.Link>
-          </Nav> */}
+            <Nav.Link onClick={() => scrollEffect(howItWorksRef)}>How it works</Nav.Link>
+            {isPageWide && <Nav.Link onClick={() => scrollEffect(faqsRef)}>FAQs</Nav.Link>}
+            {/* {isPageWide && <Nav.Link onClick={() => scrollEffect(pricingRef)}>Pricing</Nav.Link>} */}
+          </Nav>
+          {isPageWide && <Button variant="ghost" size="1" style={{ marginLeft: 10 }} onClick={() => window.location.href = 'https://cal.com/voicebridge/30-min'}><Calendar size={18} weight="bold" style={{ marginRight: 0 }} /> Book a demo</Button>}
         </Navbar>
 
         {/* Hero section */}
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
           <Col xs={12} sm={11} md={10} style={{ textAlign: 'center', maxWidth: 800, marginBottom: 20, padding: isPageWide ? 30 : 0 }}>
-            <Badge size="3" variant="soft" color="green" style={{ marginBottom: 10 }}>No more tedious forms. No more superficial answers.</Badge>
+            <Badge size="3" variant="soft" color="orange" style={{ marginBottom: 10 }}>No more superficial answers</Badge>
             {/* <h1 style={{ marginTop: 5 }}>Capture authentic insights with conversational AI voice surveys</h1> */}
-            <h1 style={{ marginTop: 5 }}>Traditional, rigid surveys are out. Conversational AI surveys are in.</h1>
+            <h1 style={{ marginTop: 5 }}>Traditional, rigid surveys are out. Conversational voice surveys are in.</h1>
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
               <Col xs={12} sm={11} md={10} lg={10} xl={10} style={{ textAlign: 'center', padding: 0 }}>
-                <Text size='4' color="gray" as='div' style={{ marginTop: 10 }}>Capture authentic insights with conversational AI voice surveys conducted by human-like voice agents. Allow respondents to share their real thoughts effortlessly and authentically.</Text>
+                <Text size='4' color="gray" as='div' style={{ marginTop: 10 }}>Capture authentic, rich insights with AI-powered voice surveys conducted by human-like AI agents that use natural conversation to allow respondents to share their real thoughts effortlessly.</Text>
                 <Button variant="solid" size="3" style={{ marginTop: 24 }} onClick={() => window.location.href = 'https://cal.com/voicebridge/30-min'}><Calendar size={18} weight="bold" style={{ marginRight: 0 }} /> Book a demo</Button>
               </Col>
             </Row>
@@ -208,32 +175,32 @@ export default function Home() {
         {/* Social proof: Quotes from scientific papers */}
 
         {/* How it works */}
-        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40, backgroundColor: 'var(--gray-12)', padding: '60px 0', borderRadius: 12 }}>
-          <Col xs={12} sm={11} md={11} lg={10} style={{ textAlign: 'left', maxWidth: 1200, marginBottom: 20, padding: isPageWide ? 30 : 0 }}>
+        <Row ref={howItWorksRef} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40, backgroundColor: 'var(--gray-12)', padding: '60px 0', borderRadius: 12 }}>
+          <Col xs={12} sm={11} md={11} lg={10} style={{ textAlign: 'left', maxWidth: 1200, marginBottom: 20, padding: isPageWide ? 30 : 20 }}>
             <h1 style={{ color: 'var(--gray-1)' }}>How it works</h1>
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
-              <Col xs={12} sm={6} style={{ textAlign: 'left', marginBottom: 30, padding: isPageWide ? 15 : 0 }}>
+              <Col xs={12} sm={6} style={{ textAlign: 'left', marginBottom: 30, padding: isPageWide ? 15 : 10 }}>
                 <NumberCircleOne size={24} weight="bold" color="var(--gray-1)" />
                 <h3 style={{ marginTop: 10, color: 'var(--gray-1)' }}>Choose a template</h3>
                 <Text size='3' color="gray" style={{ marginTop: 10, color: 'var(--gray-4)' }}>
                   Select from pre-built templates for common use cases like NPS, CSAT, product feedback and more. Or start from scratch with a blank canvas.
                 </Text>
               </Col>
-              <Col xs={12} sm={6} style={{ textAlign: 'left', marginBottom: 30, padding: isPageWide ? 15 : 0 }}>
+              <Col xs={12} sm={6} style={{ textAlign: 'left', marginBottom: 30, padding: isPageWide ? 15 : 10 }}>
                 <NumberCircleTwo size={24} weight="bold" color="var(--gray-1)" />
                 <h3 style={{ marginTop: 10, color: 'var(--gray-1)' }}>Configure your survey</h3>
                 <Text size='3' color="gray" style={{ marginTop: 10, color: 'var(--gray-4)' }}>
                   Customize the questions, AI agent personality, voice tone, and structured data outputs to match your brand and data collection needs.
                 </Text>
               </Col>
-              <Col xs={12} sm={6} style={{ textAlign: 'left', marginBottom: 30, padding: isPageWide ? 15 : 0 }}>
+              <Col xs={12} sm={6} style={{ textAlign: 'left', marginBottom: 30, padding: isPageWide ? 15 : 10 }}>
                 <NumberCircleThree size={24} weight="bold" color="var(--gray-1)" />
                 <h3 style={{ marginTop: 10, color: 'var(--gray-1)' }}>Share & embed</h3>
                 <Text size='3' color="gray" style={{ marginTop: 10, color: 'var(--gray-4)' }}>
                   Share your survey via a direct link or embed it seamlessly into your website with a simple code snippet.
                 </Text>
               </Col>
-              <Col xs={12} sm={6} style={{ textAlign: 'left', marginBottom: 30, padding: isPageWide ? 15 : 0 }}>
+              <Col xs={12} sm={6} style={{ textAlign: 'left', marginBottom: 30, padding: isPageWide ? 15 : 10 }}>
                 <NumberCircleFour size={24} weight="bold" color="var(--gray-1)" />
                 <h3 style={{ marginTop: 10, color: 'var(--gray-1)' }}>Review insights</h3>
                 <Text size='3' color="gray" style={{ marginTop: 10, color: 'var(--gray-4)' }}>
@@ -245,7 +212,7 @@ export default function Home() {
         </Row>
 
         {/* Use cases: Types of surveys, types of roles, types of industries */}
-        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
+        <Row ref={useCasesRef} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
           <Col xs={12} sm={11} md={12} style={{ textAlign: 'left', maxWidth: 1200, marginBottom: 20, padding: isPageWide ? 30 : 0 }}>
             <h1>Gather rich data across many use cases</h1>
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
@@ -310,18 +277,18 @@ export default function Home() {
           <Col xs={12} sm={11} md={12} style={{ textAlign: 'center', maxWidth: 1200, marginBottom: 20, padding: isPageWide ? 30 : 0 }}>
             <h2>Integrate with your favorite tools</h2>
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
-              <Image src="/assets/logos/excel.png" alt="Microsoft Excel" style={{ height: 30, marginLeft: 20, marginRight: 20 }} />
-              <Image src="/assets/logos/google-sheets.png" alt="Google Sheets" style={{ height: 30, marginLeft: 20, marginRight: 20 }} />
-              <Image src="/assets/logos/airtable.png" alt="Airtable" style={{ height: 30, marginLeft: 20, marginRight: 20 }} />
-              <Image src="/assets/logos/slack.png" alt="Slack" style={{ height: 30, marginLeft: 20, marginRight: 20 }} />
-              <Image src="/assets/logos/zapier.png" alt="Zapier" style={{ height: 30, marginLeft: 20, marginRight: 20 }} />
+              <Image src="/assets/logos/excel.png" alt="Microsoft Excel" style={{ height: 30, marginLeft: 20, marginRight: 20, marginBottom: 20 }} />
+              <Image src="/assets/logos/google-sheets.png" alt="Google Sheets" style={{ height: 30, marginLeft: 20, marginRight: 20, marginBottom: 20 }} />
+              <Image src="/assets/logos/airtable.png" alt="Airtable" style={{ height: 30, marginLeft: 20, marginRight: 20, marginBottom: 20 }} />
+              <Image src="/assets/logos/slack.png" alt="Slack" style={{ height: 30, marginLeft: 20, marginRight: 20, marginBottom: 20 }} />
+              <Image src="/assets/logos/zapier.png" alt="Zapier" style={{ height: 30, marginLeft: 20, marginRight: 20, marginBottom: 20 }} />
             </Row>
           </Col>
         </Row>
 
         {/* FAQs */}
         
-        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
+        <Row ref={faqsRef} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
           <Col xs={12} sm={11} md={12} style={{ textAlign: 'center', maxWidth: 1200, marginBottom: 20, padding: isPageWide ? 30 : 0 }}>
             <h2>Frequently asked questions</h2>
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
