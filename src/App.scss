@@ -12,12 +12,12 @@ html {
 }
 
 .radix-themes {
-	--default-font-family:  'DM Sans', serif;
-	--heading-font-family: 'Noto Serif', serif;
-	--code-font-family: 'DM Sans', serif;
-	--strong-font-family: 'DM Sans', serif;
-	--em-font-family: 'DM Sans', serif;
-	--quote-font-family: 'DM Sans', serif;
+	--default-font-family:  'Inter', serif;
+	--heading-font-family: 'Bricolage Grotesque', serif;
+	--code-font-family: 'Inter', serif;
+	--strong-font-family: 'Inter', serif;
+	--em-font-family: 'Inter', serif;
+	--quote-font-family: 'Inter', serif;
 }
 
 ::-webkit-scrollbar {
@@ -36,34 +36,34 @@ html {
 
 h1 {
     font-size: 54px;
-    // line-height: 1.05;
+    line-height: 1.05;
     letter-spacing: -1.5px;
-    font-family: 'Noto Serif', serif;
+    font-family: 'Bricolage Grotesque', serif;
 }
 
 h2 {
     font-size: 42px;
     // line-height: 1.05;
     letter-spacing: -1.5px;
-    font-family: 'Noto Serif', serif;
+    font-family: 'Bricolage Grotesque', serif;
 }
 
 h3 {
     font-size: 20px;
     // line-height: 1.05;
     letter-spacing: -0.5px;
-    font-family: 'Noto Serif', serif;
+    font-family: 'Bricolage Grotesque', serif;
 }
 
 h4 {
     font-size: 16px;
-    font-family: 'DM Sans', serif;
+    font-family: 'Inter', serif;
     font-weight: 500;
 }
 
 h5 {
     font-size: 14px;
-    font-family: 'DM Sans', serif;
+    font-family: 'Inter', serif;
     font-weight: 500;
 }
 

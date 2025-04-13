@@ -50,19 +50,6 @@ export default function Home() {
           </Col>
         </Row>
 
-        {/* Company logos */}
-        {/* <Marquee pauseOnHover={true} gradientColor={'#13103C'} style={{ marginTop: 20 }}>
-          <Image src="/assets/logos/ubersense.png" height="20px" style={{ marginRight: 120 }} />
-          <Image src="/assets/logos/floro.png" height="22px" style={{ marginRight: 120 }} />
-          <Image src="/assets/logos/fanflow.png" height="28px" style={{ marginRight: 120 }} />
-          <Image src="/assets/logos/biomarker.png" height="20px" style={{ marginRight: 120 }} />
-          <Image src="/assets/logos/ucsb.png" height="40px" style={{ marginRight: 120 }} />
-          <Image src="/assets/logos/waveform.png" height="22px" style={{ marginRight: 120 }} />
-          <Image src="/assets/logos/molecule.png" height="28px" style={{ marginRight: 120 }} />
-          <Image src="/assets/logos/nikos.png" height="26px" style={{ marginRight: 120 }} />
-          <Image src="/assets/logos/unbound.png" height="30px" style={{ marginRight: 120 }} />
-        </Marquee> */}
-
         {/* Footer */}
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 100 }}>
           <Col style={{ textAlign: 'center' }}>
