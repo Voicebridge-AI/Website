@@ -17,6 +17,8 @@ export default function Home() {
   const [email, setEmail] = useState('');
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [words, setWords] = useState(['customers', 'audience', 'employees', 'subscribers']);
+  const [currentWord, setCurrentWord] = useState(words[0]);
   
   const howItWorksRef = useRef(null);
   const useCasesRef = useRef(null);
@@ -26,6 +28,13 @@ export default function Home() {
     window.scrollTo(0, 0);
     setLoading(false);
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWord(words[Math.floor(Math.random() * words.length)]);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [words]);
 
   const scrollEffect = (ref) => {
     window.scrollTo({
@@ -50,12 +59,12 @@ export default function Home() {
 
   return (
 
-    <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 50 }}>
+    <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
 
-      <Col xs={12} sm={12} md={12} lg={11} xl={11} style={{ padding: 10 }}>
+      <Col xs={12} sm={12} md={12} lg={12} xl={12} style={{ padding: isPageWide ? 20 : 10 }}>
 
-        <Navbar justify="true" fixed="top" variant={theme === 'light-theme' ? "light" : "dark"} style={{ padding: '2px 10px', backgroundColor: 'rgba(255, 255, 255, 1.0)' }}>
-          <Image src="/logo.svg" alt="Voicebridge" width={isPageWide ? 160 : 120} style={{ marginLeft: 5, cursor: 'pointer' }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
+        <Navbar justify="true" fixed="top" variant={theme === 'light-theme' ? "light" : "dark"} style={{ padding: '10px', backgroundColor: 'rgba(255, 255, 255, 1.0)' }}>
+          <Image src="/logo.svg" alt="Voicebridge" width={isPageWide ? 180 : 140} style={{ marginLeft: 10, cursor: 'pointer' }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
           <Nav className="ml-auto" style={{ marginRight: 0 }}>
             <Nav.Link onClick={() => scrollEffect(useCasesRef)}>Use cases</Nav.Link>
             <Nav.Link onClick={() => scrollEffect(howItWorksRef)}>How it works</Nav.Link>
@@ -66,26 +75,48 @@ export default function Home() {
         </Navbar>
 
         {/* Hero section */}
-        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: -10, minHeight: '60vh' }}>
-          <Col xs={12} sm={11} md={10} lg={6} xl={6} style={{ textAlign: 'left', maxWidth: 900, marginBottom: 20, padding: isPageWide ? 30 : 10 }}>
-            {/* <Badge color="blue" size="3">Market research</Badge>
-            <Badge color="blue" size="3">Customer feedback</Badge>
-            <Badge color="blue" size="3">Product feedback</Badge>
-            <Badge color="blue" size="3">Employee engagement</Badge>
-            <Badge color="blue" size="3">Brand perception</Badge>
-            <Badge color="blue" size="3">Ad campaign research</Badge> */}
-            {/* <h1 style={{ marginTop: 0 }}>Capture authentic insights at scale with AI voice surveys</h1> */}
-            {/* <h1 style={{ marginTop: 0 }}>Let AI agents interview your audience </h1> */}
-            <h1 style={{ marginTop: 0 }}>Begin conversations with your customers. <span style={{ color: 'var(--gray-8)' }}>Stop making them fill out surveys.</span></h1>
-            <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
-              <Col xs={11} sm={11} md={9} lg={9} style={{ textAlign: 'left', padding: 0 }}>
-                <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>Let AI voice agents talk to 10s or 100s of your customers to capture authentic insights.</Text>
+        {/* <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 0, minHeight: '70vh', backgroundImage: 'url("/assets/background.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', borderRadius: 12 }}>
+          <Col xs={12} sm={11} md={10} style={{ textAlign: 'center', maxWidth: 900, marginBottom: 20, padding: isPageWide ? 30 : 10 }}>
+            <h1 style={{ marginTop: 20 }}>Capture deep, rich & authentic customer insights at scale.</h1>
+            <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
+              <Col xs={11} sm={11} md={9} lg={8} style={{ textAlign: 'center', padding: 0 }}>
+                <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>Voicebridge's AI voice agents have 10s to 1000s of natural human-like conversations to find out what they really think and feel.</Text>
                 <Button variant="solid" size="3" style={{ marginTop: 24 }} onClick={openBookDemo}>Book a demo <ArrowUpRight size={16} weight="bold" /></Button>
+                <div style={{ border: '1px solid var(--gray-6)', borderRadius: '16px', padding: '12px 12px 12px 12px', backgroundColor: '#111111', marginTop: 84 }}>
+                  <div style={{ display: 'flex', gap: '6px', marginBottom: '12px' }}>
+                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#FF5F56' }}></div>
+                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#FFBD2E' }}></div>
+                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#27C93F' }}></div>
+                  </div>
+                  <div style={{ borderRadius: '8px', overflow: 'hidden' }}>
+                    <Image src="/assets/screenshots/nps-survey-record-widget-2.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
+                </div>
               </Col>
             </Row>
           </Col>
-          <Col xs={12} sm={11} md={11} lg={6} xl={6} style={{ textAlign: 'center', maxWidth: 900, marginBottom: 20, padding: isPageWide ? 30 : 10 }}>
-            <div style={{ border: '1px solid var(--gray-6)', borderRadius: '16px', padding: '12px 12px 12px 12px', backgroundColor: 'var(--gray-2)' }}>
+        </Row> */}
+
+        {/* Hero section */}
+        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 30 : 40, minHeight: '60vh', backgroundImage: 'url("/assets/frontpage/background-blue.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', borderRadius: 12 }}>
+          <Col xs={12} sm={11} md={10} lg={6} xl={6} style={{ textAlign: 'left', maxWidth: 900, marginTop: isPageWide ? 0 : 40, marginBottom: 20, padding: isPageWide ? 40 : 20 }}>
+            <h1 style={{ marginTop: 0 }}>Start conversations with your audience. <span style={{ color: 'var(--accent-9)' }}>Don't make them fill out forms.</span></h1>
+            {/* <h1 style={{ marginTop: 0 }}>AI-moderated conversational voice surveys capture authentic insights at scale.</h1> */}
+            {/* <h1 style={{ marginTop: 0 }}>Begin conversations with your customers - at scale.</h1> */}
+            {/* <h1 style={{ marginTop: 0 }}>Capture your customers' voice - at scale.</h1> */}
+            {/* <h1 style={{ marginTop: 0 }}>Capture your audience's true voice, at scale.</h1> */}
+            {/* <h1 style={{ marginTop: 0 }}>Capture authentic insights from your audience - at scale</h1> */}
+            {/* <h1 style={{ marginTop: 0 }}>Capture in-depth insights from your {currentWord}</h1> */}
+            {/* <h1 style={{ marginTop: 0 }}>Don't survey your audience. <span style={{ color: 'var(--gray-9)' }}>Have conversations with them.</span></h1> */}
+            <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
+              <Col xs={11} sm={11} md={9} lg={9} style={{ textAlign: 'left', padding: 0 }}>
+                <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>Voicebridge's AI voice agents conduct & analyze 10s to 1000s of natural human-like interviews to find out what they really think.</Text>
+                <Button variant="solid" size={isPageWide ? '4' : '3'} style={{ marginTop: 24 }} onClick={openBookDemo}>Book a demo <ArrowUpRight size={16} weight="bold" /></Button>
+              </Col>
+            </Row>
+          </Col>
+          <Col xs={12} sm={11} md={11} lg={6} xl={6} style={{ textAlign: 'center', maxWidth: 900, marginBottom: 20, padding: isPageWide ? 40 : 10 }}>
+            <div style={{ borderRadius: '16px', padding: '12px 12px 12px 12px', backgroundColor: 'var(--gray-12)' }}>
               <div style={{ display: 'flex', gap: '6px', marginBottom: '12px' }}>
                 <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#FF5F56' }}></div>
                 <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#FFBD2E' }}></div>
@@ -93,6 +124,7 @@ export default function Home() {
               </div>
               <div style={{ borderRadius: '8px', overflow: 'hidden' }}>
                 <Image src="/assets/screencaptures/nps-survey-record-widget.gif" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                {/* <Image src="/assets/screenshots/nps-survey-record-widget.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> */}
               </div>
             </div>
           </Col>  
@@ -102,8 +134,13 @@ export default function Home() {
 
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 80 }}>
           <Col xs={12} sm={11} md={12} style={{ textAlign: 'left', maxWidth: 1200, marginBottom: 20, padding: isPageWide ? 30 : 10 }}>
-            <h2>Deeper insights, faster</h2>
-            <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 60 }}>
+            {/* <h2>Get deeper, more meaningful insights faster</h2> */}
+            <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 0 }}>
+              <Col xs={12} sm={11} md={10} style={{ textAlign: 'center', maxWidth: 1200, marginBottom: 20, padding: isPageWide ? 30 : 10 }}>
+                <h2>AI-moderated conversational voice interviews capture authentic insights at scale.</h2>
+              </Col>
+            </Row>
+            <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
               <Col xs={12} sm={11} md={4} style={{ textAlign: 'left', marginBottom: 20, padding: isPageWide ? 20 : 0 }}>
                 <ChatsCircle size={24} />
                 <h3 style={{ marginTop: 10 }}>Natural Conversations</h3>
@@ -174,7 +211,7 @@ export default function Home() {
         {/* Use case categories */}
         <Row ref={useCasesRef} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 80 }}>
           <Col xs={12} sm={11} md={12} style={{ textAlign: 'left', maxWidth: 1200, marginBottom: 20, padding: isPageWide ? 30 : 10 }}>
-            <h2>Explore use cases by category</h2>
+            <h2>Use cases</h2>
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'stretch', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
               
               {/* Market and Brand Research */}
@@ -214,7 +251,7 @@ export default function Home() {
               </Col>
 
               {/* Employee Engagement */}
-              <Col xs={12} sm={11} md={4} style={{ textAlign: 'left', marginBottom: 30, padding: isPageWide ? 15 : 10 }}>
+              {/* <Col xs={12} sm={11} md={4} style={{ textAlign: 'left', marginBottom: 30, padding: isPageWide ? 15 : 10 }}>
                 <div style={{ height: '100%', padding: 30, backgroundColor: 'var(--gray-2)', borderRadius: 12, border: '1px solid var(--gray-5)' }}>
                   <h3>Employee Engagement</h3>
                   <Text size={isPageWide ? '3' : '2'} color="gray" as='div' style={{ marginTop: 20, marginBottom: 20 }}>
@@ -227,6 +264,24 @@ export default function Home() {
                     <li style={{ marginBottom: 10 }}><Text size="2">• Culture assessment</Text></li>
                     <li style={{ marginBottom: 10 }}><Text size="2">• Training effectiveness</Text></li>
                     <li><Text size="2">• Remote work experience</Text></li>
+                  </ul>
+                </div>
+              </Col> */}
+
+              {/* Government & Academic Research */}
+              <Col xs={12} sm={11} md={4} style={{ textAlign: 'left', marginBottom: 30, padding: isPageWide ? 15 : 10 }}>
+                <div style={{ height: '100%', padding: 30, backgroundColor: 'var(--gray-2)', borderRadius: 12, border: '1px solid var(--gray-5)' }}>
+                  <h3>Government & Academic Research</h3>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div' style={{ marginTop: 20, marginBottom: 20 }}>
+                    Conduct research studies and gather insights for policy making, academic work, and public initiatives.
+                  </Text>
+                  <ul style={{ listStyleType: 'none', padding: 0 }}>
+                    <li style={{ marginBottom: 10 }}><Text size="2">• Policy impact assessment</Text></li>
+                    <li style={{ marginBottom: 10 }}><Text size="2">• Public opinion research</Text></li>
+                    <li style={{ marginBottom: 10 }}><Text size="2">• Academic studies</Text></li>
+                    <li style={{ marginBottom: 10 }}><Text size="2">• Program evaluation</Text></li>
+                    <li style={{ marginBottom: 10 }}><Text size="2">• Community needs assessment</Text></li>
+                    <li><Text size="2">• Social impact measurement</Text></li>
                   </ul>
                 </div>
               </Col>
@@ -251,21 +306,21 @@ export default function Home() {
                 <NumberCircleTwo size={24} weight="bold" color="var(--gray-1)" />
                 <h3 style={{ marginTop: 10, color: 'var(--gray-1)' }}>Configure your survey</h3>
                 <Text size={isPageWide ? '3' : '2'} color="gray" style={{ marginTop: 10, color: 'var(--gray-4)' }}>
-                  Customize the questions, AI agent personality, voice tone, and structured data outputs to match your brand and data collection needs.
+                  Customize the questions the AI agent asks, the question types, the agent's voice, language, and an accompanying context to match your brand and data collection needs as well as the audience you're surveying.
                 </Text>
               </Col>
               <Col xs={12} sm={6} style={{ textAlign: 'left', marginBottom: 30, padding: isPageWide ? 15 : 10 }}>
                 <NumberCircleThree size={24} weight="bold" color="var(--gray-1)" />
                 <h3 style={{ marginTop: 10, color: 'var(--gray-1)' }}>Share & embed</h3>
                 <Text size={isPageWide ? '3' : '2'} color="gray" style={{ marginTop: 10, color: 'var(--gray-4)' }}>
-                  Share your survey via a direct link or embed it seamlessly into your website with a simple code snippet.
+                  Share your survey via a direct link, embed it on your website, or share it via email or social media.
                 </Text>
               </Col>
               <Col xs={12} sm={6} style={{ textAlign: 'left', marginBottom: 30, padding: isPageWide ? 15 : 10 }}>
                 <NumberCircleFour size={24} weight="bold" color="var(--gray-1)" />
-                <h3 style={{ marginTop: 10, color: 'var(--gray-1)' }}>Review insights</h3>
+                <h3 style={{ marginTop: 10, color: 'var(--gray-1)' }}>Analyze results</h3>
                 <Text size={isPageWide ? '3' : '2'} color="gray" style={{ marginTop: 10, color: 'var(--gray-4)' }}>
-                  Access comprehensive analytics including response summaries, sentiment analysis, and structured data outputs in an easy-to-digest format.
+                  Use natural language querying to get answers to your questions or use our AI to generate comprehensive reports, ready to share with stakeholders in minutes.
                 </Text>
               </Col>
             </Row>
@@ -315,7 +370,7 @@ export default function Home() {
         {/* Footer Links */}
         <Row style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginTop: 160, marginBottom: 40 }}>
           <Col xs={12} md={3} style={{ marginBottom: 20, maxWidth: 300 }}>
-            <img src="/logo.svg" alt="Voicebridge Logo" width={isPageWide ? 140 : 100} style={{ height: 24 }} />
+            <Image src="/logo.svg" alt="Voicebridge Logo" width={isPageWide ? 160 : 140} style={{ height: 24 }} />
             <Text size="3" color="gray" as="div" style={{ marginTop: 15 }}>
               Capture authentic insights with conversational AI voice surveys
             </Text>

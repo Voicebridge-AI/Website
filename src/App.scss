@@ -37,15 +37,17 @@ html {
 h1 {
     font-size: 54px;
     line-height: 1.05;
-    letter-spacing: -1.5px;
+    letter-spacing: -1.25px;
     font-family: 'Bricolage Grotesque', serif;
+    font-weight: 400;
 }
 
 h2 {
     font-size: 42px;
-    // line-height: 1.05;
-    letter-spacing: -1.5px;
+    line-height: 1.05;
+    letter-spacing: -1.25px;
     font-family: 'Bricolage Grotesque', serif;
+    font-weight: 400;
 }
 
 h3 {
@@ -53,6 +55,7 @@ h3 {
     // line-height: 1.05;
     letter-spacing: -0.5px;
     font-family: 'Bricolage Grotesque', serif;
+    font-weight: 500;
 }
 
 h4 {
