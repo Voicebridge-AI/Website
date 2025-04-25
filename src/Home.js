@@ -1,10 +1,9 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
 import { Row, Col, Image, Navbar, Nav } from 'react-bootstrap';
-import { Badge, Button, Text, Link } from '@radix-ui/themes';
-import { Calendar, NumberCircleOne, NumberCircleTwo, NumberCircleThree, NumberCircleFour, PencilLine, Smiley, Brain, XLogo, LinkedinLogo, Globe, UserSound, ChatsCircle, Presentation, CurrencyCircleDollar, Lightning, Sparkle, ArrowUpRight } from '@phosphor-icons/react';
-import { useMediaQuery, validateEmail } from './shared-functions.js';
+import { Button, Text, Link } from '@radix-ui/themes';
+import { NumberCircleOne, NumberCircleTwo, NumberCircleThree, NumberCircleFour, Smiley, Brain, Globe, UserSound, ChatsCircle, Presentation, CurrencyCircleDollar, Lightning, Sparkle, ArrowUpRight, LinkedinLogo, XLogo } from '@phosphor-icons/react';
+import { useMediaQuery } from './shared-functions.js';
 import { ThemeContext } from './Theme.js';
-import Marquee from "react-fast-marquee";
 import { faqItems } from './config/faqs.js';
 import FaqItem from './components/FaqItem.js';
 import { toast, Toaster } from 'react-hot-toast';
@@ -14,11 +13,7 @@ export default function Home() {
   let isPageWide = useMediaQuery('(min-width: 640px)');
   const { theme } = useContext(ThemeContext);
 
-  const [email, setEmail] = useState('');
-  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [words, setWords] = useState(['customers', 'audience', 'employees', 'subscribers']);
-  const [currentWord, setCurrentWord] = useState(words[0]);
   
   const howItWorksRef = useRef(null);
   const useCasesRef = useRef(null);
@@ -29,13 +24,6 @@ export default function Home() {
     setLoading(false);
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentWord(words[Math.floor(Math.random() * words.length)]);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [words]);
-
   const scrollEffect = (ref) => {
     window.scrollTo({
       top: ref.current.offsetTop,
@@ -43,16 +31,6 @@ export default function Home() {
     });
   };
   
-  // const saveEmail = (email) => {
-  //   // console.log(email, encodeURIComponent(email.trim()));
-  //   if (email && email.trim() !== '' && validateEmail(email.trim())) {
-  //     window.open(`https://cal.com/voicebridge/demo?email=${encodeURIComponent(email.trim())}`, '_blank', 'noopener,noreferrer');
-  //   } else {
-  //     toast.error('Please enter a valid email address');
-  //     // window.open('https://cal.com/voicebridge/demo', '_blank', 'noopener,noreferrer');
-  //   }
-  // };
-
   const openBookDemo = () => {
     window.open('https://cal.com/voicebridge/demo', '_blank', 'noopener,noreferrer');
   };
@@ -75,42 +53,13 @@ export default function Home() {
         </Navbar>
 
         {/* Hero section */}
-        {/* <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 0, minHeight: '70vh', backgroundImage: 'url("/assets/background.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', borderRadius: 12 }}>
-          <Col xs={12} sm={11} md={10} style={{ textAlign: 'center', maxWidth: 900, marginBottom: 20, padding: isPageWide ? 30 : 10 }}>
-            <h1 style={{ marginTop: 20 }}>Capture deep, rich & authentic customer insights at scale.</h1>
-            <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
-              <Col xs={11} sm={11} md={9} lg={8} style={{ textAlign: 'center', padding: 0 }}>
-                <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>Voicebridge's AI voice agents have 10s to 1000s of natural human-like conversations to find out what they really think and feel.</Text>
-                <Button variant="solid" size="3" style={{ marginTop: 24 }} onClick={openBookDemo}>Book a demo <ArrowUpRight size={16} weight="bold" /></Button>
-                <div style={{ border: '1px solid var(--gray-6)', borderRadius: '16px', padding: '12px 12px 12px 12px', backgroundColor: '#111111', marginTop: 84 }}>
-                  <div style={{ display: 'flex', gap: '6px', marginBottom: '12px' }}>
-                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#FF5F56' }}></div>
-                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#FFBD2E' }}></div>
-                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#27C93F' }}></div>
-                  </div>
-                  <div style={{ borderRadius: '8px', overflow: 'hidden' }}>
-                    <Image src="/assets/screenshots/nps-survey-record-widget-2.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  </div>
-                </div>
-              </Col>
-            </Row>
-          </Col>
-        </Row> */}
-
-        {/* Hero section */}
-        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 30 : 40, minHeight: '60vh', backgroundImage: 'url("/assets/frontpage/background-blue.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', borderRadius: 12 }}>
+        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 30 : 40, minHeight: '60vh', borderRadius: 12 }}>
           <Col xs={12} sm={11} md={10} lg={6} xl={6} style={{ textAlign: 'left', maxWidth: 900, marginTop: isPageWide ? 0 : 40, marginBottom: 20, padding: isPageWide ? 40 : 20 }}>
-            <h1 style={{ marginTop: 0 }}>Start conversations with your audience. <span style={{ color: 'var(--accent-9)' }}>Don't make them fill out forms.</span></h1>
-            {/* <h1 style={{ marginTop: 0 }}>AI-moderated conversational voice surveys capture authentic insights at scale.</h1> */}
-            {/* <h1 style={{ marginTop: 0 }}>Begin conversations with your customers - at scale.</h1> */}
-            {/* <h1 style={{ marginTop: 0 }}>Capture your customers' voice - at scale.</h1> */}
-            {/* <h1 style={{ marginTop: 0 }}>Capture your audience's true voice, at scale.</h1> */}
-            {/* <h1 style={{ marginTop: 0 }}>Capture authentic insights from your audience - at scale</h1> */}
-            {/* <h1 style={{ marginTop: 0 }}>Capture in-depth insights from your {currentWord}</h1> */}
-            {/* <h1 style={{ marginTop: 0 }}>Don't survey your audience. <span style={{ color: 'var(--gray-9)' }}>Have conversations with them.</span></h1> */}
+            <h2 style={{ textDecoration: 'line-through', color: 'var(--gray-11)' }}>Traditional form surveys</h2>
+            <h1 style={{ marginTop: 10 }}>Collect authentic insights with conversational voice surveys</h1>
             <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
               <Col xs={11} sm={11} md={9} lg={9} style={{ textAlign: 'left', padding: 0 }}>
-                <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>Voicebridge's AI voice agents conduct & analyze 10s to 1000s of natural human-like interviews to find out what they really think.</Text>
+                <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10, color: 'black' }}>Let Voicebridge's AI voice agents conduct & analyze 10s to 1000s of natural human-like voice conversations with your audience to learn what they really think.</Text>
                 <Button variant="solid" size={isPageWide ? '4' : '3'} style={{ marginTop: 24 }} onClick={openBookDemo}>Book a demo <ArrowUpRight size={16} weight="bold" /></Button>
               </Col>
             </Row>
@@ -124,7 +73,6 @@ export default function Home() {
               </div>
               <div style={{ borderRadius: '8px', overflow: 'hidden' }}>
                 <Image src="/assets/screencaptures/nps-survey-record-widget.gif" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                {/* <Image src="/assets/screenshots/nps-survey-record-widget.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> */}
               </div>
             </div>
           </Col>  
@@ -134,10 +82,9 @@ export default function Home() {
 
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 80 }}>
           <Col xs={12} sm={11} md={12} style={{ textAlign: 'left', maxWidth: 1200, marginBottom: 20, padding: isPageWide ? 30 : 10 }}>
-            {/* <h2>Get deeper, more meaningful insights faster</h2> */}
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 0 }}>
               <Col xs={12} sm={11} md={10} style={{ textAlign: 'center', maxWidth: 1200, marginBottom: 20, padding: isPageWide ? 30 : 10 }}>
-                <h2>AI-moderated conversational voice interviews capture authentic insights at scale.</h2>
+                <h2>Get deeper & richer responses at scale</h2>
               </Col>
             </Row>
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 40 }}>
@@ -372,7 +319,7 @@ export default function Home() {
           <Col xs={12} md={3} style={{ marginBottom: 20, maxWidth: 300 }}>
             <Image src="/logo.svg" alt="Voicebridge Logo" width={isPageWide ? 160 : 140} style={{ height: 24 }} />
             <Text size="3" color="gray" as="div" style={{ marginTop: 15 }}>
-              Capture authentic insights with conversational AI voice surveys
+              Collect authentic insights with conversational AI voice surveys
             </Text>
             <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
               <Link href="https://x.com/voicebridgeai" target="_blank noopener noreferrer" className="social-icon" style={{ marginRight: 10 }}><XLogo size={20} weight="bold" style={{ color: 'gray' }} /></Link>

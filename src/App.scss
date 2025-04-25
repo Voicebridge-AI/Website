@@ -12,12 +12,12 @@ html {
 }
 
 .radix-themes {
-	--default-font-family:  'Inter', serif;
-	--heading-font-family: 'Bricolage Grotesque', serif;
-	--code-font-family: 'Inter', serif;
-	--strong-font-family: 'Inter', serif;
-	--em-font-family: 'Inter', serif;
-	--quote-font-family: 'Inter', serif;
+	--default-font-family:  'Host Grotesk', sans-serif;
+	--heading-font-family: 'Host Grotesk', sans-serif;
+	--code-font-family: 'Host Grotesk', sans-serif;
+	--strong-font-family: 'Host Grotesk', sans-serif;
+	--em-font-family: 'Host Grotesk', sans-serif;
+	--quote-font-family: 'Host Grotesk', sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -36,9 +36,9 @@ html {
 
 h1 {
     font-size: 54px;
-    line-height: 1.05;
+    line-height: 1.1;
     letter-spacing: -1.25px;
-    font-family: 'Bricolage Grotesque', serif;
+    font-family: 'Host Grotesk', sans-serif;
     font-weight: 400;
 }
 
@@ -46,7 +46,7 @@ h2 {
     font-size: 42px;
     line-height: 1.05;
     letter-spacing: -1.25px;
-    font-family: 'Bricolage Grotesque', serif;
+    font-family: 'Host Grotesk', sans-serif;
     font-weight: 400;
 }
 
@@ -54,20 +54,20 @@ h3 {
     font-size: 20px;
     // line-height: 1.05;
     letter-spacing: -0.5px;
-    font-family: 'Bricolage Grotesque', serif;
-    font-weight: 500;
+    font-family: 'Host Grotesk', sans-serif;
+    font-weight: 400;
 }
 
 h4 {
     font-size: 16px;
-    font-family: 'Inter', serif;
-    font-weight: 500;
+    font-family: 'Host Grotesk', sans-serif;
+    font-weight: 400;
 }
 
 h5 {
     font-size: 14px;
-    font-family: 'Inter', serif;
-    font-weight: 500;
+    font-family: 'Host Grotesk', sans-serif;
+    font-weight: 400;
 }
 
 @media (max-width: 1200px) {
