@@ -1,14 +1,14 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
 import { Row, Col, Image, Navbar, Nav } from 'react-bootstrap';
 import { Button, Text, Link, Card } from '@radix-ui/themes';
-import { ArrowUpRight, LinkedinLogo, Microphone, XLogo, NotePencil, ArrowRight, SquaresFour, Sparkle, Lightbulb, Star, SquareLogo, AppleLogo, Handshake, Browser, Book } from '@phosphor-icons/react';
+import { ArrowUpRight, LinkedinLogo, Microphone, XLogo, NotePencil, SquaresFour, Sparkle, Lightbulb, Star, SquareLogo, AppleLogo, Handshake, Browser, Book } from '@phosphor-icons/react';
 import { useMediaQuery } from './shared-functions.js';
 import { ThemeContext } from './Theme.js';
 import { faqItems } from './config/faqs.js';
 import FaqItem from './components/FaqItem.js';
 import { toast, Toaster } from 'react-hot-toast';
-import Marquee from 'react-fast-marquee';
-import { SAMPLE_RESPONSES_1, SAMPLE_RESPONSES_2 } from './config/responses.js';
+// import Marquee from 'react-fast-marquee';
+// import { SAMPLE_RESPONSES_1, SAMPLE_RESPONSES_2 } from './config/responses.js';
 // import AudioIcon from './components/AudioIcon.js';
 
 export default function Home() {
@@ -43,7 +43,7 @@ export default function Home() {
 
     <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
 
-      <Col xs={12} sm={12} md={12} lg={11} xl={10} style={{ padding: isPageWide ? 20 : 10 }}>
+      <Col xs={12} sm={12} md={12} lg={11} xl={11} style={{ padding: isPageWide ? 20 : 10 }}>
 
         <Navbar justify="true" fixed="top" variant={theme === 'light-theme' ? "light" : "dark"} style={{ padding: '10px', backgroundColor: 'rgba(255, 255, 255, 1.0)' }}>
           <Image src="/logo.svg" alt="Voicebridge" width={isPageWide ? 180 : 140} style={{ marginLeft: 10, cursor: 'pointer' }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
@@ -54,97 +54,33 @@ export default function Home() {
           </Nav>
         </Navbar>
 
-        {/* <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 80 : 30 }}>
+        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 80 : 30 }}>
           <Col xs={12} sm={11} md={11} lg={6} xl={6} style={{ textAlign: 'left', maxWidth: 960, marginTop: isPageWide ? 0 : 40, padding: isPageWide ? 40 : 20 }}>
-            <h3 style={{ color: 'var(--gray-11)' }}>👋 Say hello to AI interviewers</h3>
-            <h1 style={{ marginTop: 20 }}>Collect authentic voice feedback from customers, fast.</h1>
+            <h3 style={{ color: 'var(--gray-11)' }}>👋 Goodbye survey forms</h3>
+            <h1 style={{ marginTop: 16 }}>AI interviewers collect in-depth insights, fast.</h1>
             <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
               <Col xs={12} sm={11} md={9} lg={9} xl={9} style={{ textAlign: 'left', padding: 0 }}>
-                <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>Voicebridge helps you find participants, conduct voice interviews, analyze responses, and generate actionable insights.</Text>
+                <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>For feedback, reviews, testimonials, and research, use Voicebridge to conduct voice interviews, analyze responses, and generate actionable insights.</Text>
                 <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-start', marginTop: 20 }}>
                   <Button variant="solid" size={isPageWide ? '4' : '3'} onClick={openBookDemo}>Book a demo <ArrowUpRight size={16} weight="bold" /></Button>
-                  <Button variant="outline" size={isPageWide ? '4' : '3'}>Try it out <ArrowUpRight size={16} weight="bold" /></Button>
+                  <Button variant="outline" size={isPageWide ? '4' : '3'} onClick={() => window.open('https://surveys.voicebridgeai.com/s/0cbcfb60-af23-41c3-bb8f-824bfd6495db', '_blank', 'noopener,noreferrer')}>Try it out <ArrowUpRight size={16} weight="bold" /></Button>
                 </div>
               </Col>
             </Row>
           </Col>
-          <Col xs={12} sm={11} md={8} lg={6} xl={6} style={{ textAlign: 'left', maxWidth: 960, marginTop: isPageWide ? 0 : 0, padding: isPageWide ? 10 : 20 }}>
-            <div style={{ borderRadius: '16px', padding: '12px', backgroundColor: 'var(--gray-1)', border: '1px solid var(--gray-5)', width: '100%', aspectRatio: '1 / 1', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', gap: '6px', marginBottom: '12px' }}>
+          <Col xs={12} sm={11} md={8} lg={6} xl={6} style={{ maxWidth: 660, marginTop: isPageWide ? 0 : 0, padding: isPageWide ? 10 : 20 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', borderRadius: 16, padding: 12, backgroundColor: '#fafafa', border: '1px solid var(--gray-6)' }}>
+              <div style={{ display: 'flex', gap: '6px', position: 'absolute', top: '12px', left: '12px', zIndex: 1 }}>
                 <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#FF5F56' }}></div>
                 <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#FFBD2E' }}></div>
                 <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#27C93F' }}></div>
               </div>
-              <div style={{ position: 'relative', width: '100%', aspectRatio: '1/1', backgroundColor: 'var(--gray-1)', borderRadius: '16px', padding: '20px', border: '1px solid var(--gray-5)' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '40px' }}>
-                  <div style={{ alignSelf: 'flex-start', maxWidth: '70%', backgroundColor: '#e3e3e3', padding: '12px', borderRadius: '16px 16px 16px 4px' }}>
-                    <Text size="2" as='div'>What made you choose our product over competitors?</Text>
-                  </div>
-                  <div style={{ alignSelf: 'flex-end', maxWidth: '70%', backgroundColor: '#007AFF', padding: '12px', borderRadius: '16px 16px 4px 16px' }}>
-                    <Text size="2" style={{ color: 'white' }} as='div'>Well, I was looking for something that...</Text>
-                  </div>
-                  <div style={{ alignSelf: 'flex-start', maxWidth: '70%', backgroundColor: '#e3e3e3', padding: '12px', borderRadius: '16px 16px 16px 4px' }}>
-                    <Text size="2" as='div'>Could you elaborate on what specific features attracted you?</Text>
-                  </div>
-                  <div style={{ alignSelf: 'flex-end', maxWidth: '70%', backgroundColor: '#007AFF', padding: '12px', borderRadius: '16px 16px 4px 16px' }}>
-                    <Text size="2" style={{ color: 'white' }} as='div'>Um, let me think... I really liked the, uh, dashboard interface and... you know, the analytics features were exactly what I was looking for. Though honestly, it could use some work on the, um, export functionality - that part feels a bit clunky...</Text>
-                  </div>
-                  <div style={{ alignSelf: 'flex-start', maxWidth: '70%', backgroundColor: '#e3e3e3', padding: '12px', borderRadius: '16px 16px 16px 4px' }}>
-                    <Text size="2" as='div'>That's great feedback! How has it improved your workflow?</Text>
-                  </div>
-                </div>
-
-                <div style={{
-                  position: 'absolute',
-                  bottom: '40px',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  width: '80px',
-                  height: '80px',
-                  backgroundColor: '#FF4444',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  animation: 'throb 1.5s ease-in-out infinite',
-                  boxShadow: '0 0 20px rgba(255, 68, 68, 0.3)'
-                }}>
-                  <style>
-                    {`
-                    @keyframes throb {
-                      0% { transform: translateX(-50%) scale(1); }
-                      50% { transform: translateX(-50%) scale(1.1); }
-                      100% { transform: translateX(-50%) scale(1); }
-                    }
-                  `}
-                  </style>
-                  <Microphone size={32} weight="fill" color="white" />
-                </div>
-              </div>
+              <Image src={'/assets/screencaptures/demo.gif'} style={{ maxWidth: 400, objectFit: 'contain', marginTop: 24 }} />
             </div>
-
-          </Col>
-        </Row> */}
-
-
-        {/* Hero section */}
-        <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 60 : 30 }}>
-          <Col xs={12} sm={11} md={11} lg={10} xl={10} style={{ textAlign: 'center', maxWidth: 960 }}>
-            <h3 style={{ color: 'var(--gray-11)' }}>👋 Goodbye form-based surveys</h3>
-            <h1 style={{ marginTop: 20 }}>Collect authentic voice-based feedback from customers, fast.</h1>
-            <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
-              <Col xs={12} sm={11} md={9} lg={8} xl={8} style={{ textAlign: 'center', padding: 0 }}>
-                <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>Voicebridge helps you find participants, conduct voice interviews, analyze responses, and generate actionable insights.</Text>
-                <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginTop: 24 }}>
-                  <Button variant="solid" size={isPageWide ? '4' : '3'} onClick={openBookDemo}>Book a demo <ArrowUpRight size={16} weight="bold" /></Button>
-                  <Button variant="outline" size={isPageWide ? '4' : '3'}>Try it out <ArrowUpRight size={16} weight="bold" /></Button>
-                </div>
-              </Col>
-            </Row>
           </Col>
         </Row>
 
-        <Marquee pauseOnHover={true} gradientColor={'#13103C'} speed={40} direction="left" style={{ marginTop: 40 }}>
+        {/* <Marquee pauseOnHover={true} gradientColor={'#13103C'} speed={40} direction="left" style={{ marginTop: 40 }}>
           {SAMPLE_RESPONSES_1.map((response, index) => (
             <div key={index} style={{ display: 'flex', alignItems: 'flex-start', marginRight: 10, width: 400, height: 120, backgroundColor: '#fff3e6', padding: 15, borderRadius: 10 }}>
               <Image src={response.image} width={50} height={50} style={{ borderRadius: '50%', marginRight: 15 }} />
@@ -165,7 +101,7 @@ export default function Home() {
               </div>
             </div>
           ))}
-        </Marquee>
+        </Marquee> */}
 
 
         {/* <Marquee pauseOnHover={true} gradientColor={'#13103C'} style={{ marginTop: 80 }}>
@@ -182,21 +118,19 @@ export default function Home() {
 
         {/* Side-by-side comparison of form vs. voicebridge */}
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 80 }}>
-          <Col xs={12} sm={11} md={12} style={{ textAlign: 'left', marginBottom: 20, padding: isPageWide ? 30 : 10 }}>
-            <h2>Get richer, meaningful insights</h2>
+          <Col xs={12} sm={12} md={12} lg={12} xl={12} style={{ textAlign: 'left', marginBottom: 20, padding: isPageWide ? 20 : 10 }}>
+            <h2>Authentic and rich insights, delivered</h2>
             <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
               <Col xs={12} sm={11} md={8} lg={7} xl={6} style={{ textAlign: 'left', padding: 0 }}>
                 <Text size={isPageWide ? '4' : '3'} color="gray" as='div' style={{ marginTop: 10, marginBottom: 10 }}>
-                  Voicebridge's AI-moderated conversational voice survey platform replaces traditional forms, in-depth interviews and focus groups used in various research methods.
+                  Voicebridge's AI-moderated conversational voice interviews replace traditional forms, in-depth interviews and focus groups because they capture deeper insights at a fraction of the cost.
                 </Text>
               </Col>
             </Row>
 
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
               <Col xs={12} sm={12} md={6} style={{ padding: isPageWide ? 30 : 10 }}>
-                <h3 style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  Traditional Survey
-                </h3>
+                <h3>Traditional Survey</h3>
                 <Text size={isPageWide ? '4' : '3'} color="gray" as='div' style={{ marginTop: 10, marginBottom: 10 }}>Short, generic answers that lack depth, context, and emotion.</Text>
 
                 <Card style={{ width: '100%', padding: 24, marginTop: 20, minHeight: 320, backgroundColor: '#f5f5f5', borderRadius: 8 }}>
@@ -224,11 +158,11 @@ export default function Home() {
                     </div>
                     <div>
                       <Text size={isPageWide ? '4' : '3'} as='label' style={{ fontWeight: 500, display: 'block', marginBottom: 8 }}>What is the primary reason for your score?</Text>
-                      <input type="text" defaultValue="Good product." style={{ width: '100%', padding: '8px', borderRadius: 4, border: '1px solid #ccc' }} />
+                      <input type="text" defaultValue="Good product" style={{ width: '100%', padding: '8px', borderRadius: 4, border: '1px solid #ccc' }} />
                     </div>
                     <div>
                       <Text size={isPageWide ? '4' : '3'} as='label' style={{ fontWeight: 500, display: 'block', marginBottom: 8 }}>What can we improve?</Text>
-                      <textarea defaultValue="Could use better documentation." style={{ width: '100%', padding: '8px', borderRadius: 4, border: '1px solid #ccc', minHeight: 80 }}></textarea>
+                      <textarea defaultValue="Export could be better" style={{ width: '100%', padding: '8px', borderRadius: 4, border: '1px solid #ccc', minHeight: 80 }}></textarea>
                     </div>
                   </form>
                 </Card>
@@ -289,24 +223,87 @@ export default function Home() {
         </Row>
 
         {/* Use cases */}
-        <Row ref={useCasesRef} style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 80 }}>
-          <Col xs={12} sm={11} md={12} style={{ textAlign: 'left', marginBottom: 20, padding: isPageWide ? 30 : 10 }}>
+        <Row ref={useCasesRef} style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 100 }}>
+          <Col xs={12} sm={11} md={8} lg={7} xl={6} style={{ textAlign: 'left', padding: 0 }}>
             <Text as='div' color="gray" style={{ marginBottom: 10 }}>Use cases</Text>
-            <h2>Perfect for every research need</h2>
-            <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
-              <Col xs={12} sm={11} md={8} lg={7} xl={6} style={{ textAlign: 'left', padding: 0 }}>
-              <Text size={isPageWide ? '4' : '3'} color="gray" as='div' style={{ marginTop: 10, marginBottom: 10 }}>
-                  Whether you're conducting market research, gathering customer feedback, or running academic studies, conversational voice surveys capture richer insights than traditional methods. Get the depth of interviews with the scale of surveys.
-                </Text>
-              </Col>
-            </Row>
+            <h2>Perfect for when the "why" matters</h2>
+            <Text size={isPageWide ? '4' : '3'} color="gray" as='div' style={{ marginTop: 10, marginBottom: 10 }}>
+              AI-moderated voice interviews use natural dialogue to capture deeper thoughts and the real intent behind responses that.
+            </Text>
           </Col>
         </Row>
 
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 0 }}>
+          <Col xs={6} sm={6} md={6} lg={3} xl={3} style={{ textAlign: 'left', marginBottom: 20, padding: 10 }}>
+            <Card style={{ padding: 20 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                <Browser size={24} />
+                <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10, fontWeight: 600 }}>Product Feedback</Text>
+                <div style={{ marginTop: 10 }}>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Qualitative NPS feedback</Text>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Concept testing</Text>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Value proposition validation</Text>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Feature requests</Text>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Creative testing</Text>
+                </div>
+              </div>
+            </Card>
+          </Col>
+
+          <Col xs={6} sm={6} md={6} lg={3} xl={3} style={{ textAlign: 'left', marginBottom: 20, padding: 10 }}>
+            <Card style={{ padding: 20 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                <Star size={24} />
+                <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10, fontWeight: 600 }}>Reviews & Testimonials</Text>
+                <div style={{ marginTop: 10 }}>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Customer reviews</Text>
+
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Case study interviews</Text>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Success stories</Text>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Product reviews</Text>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Service feedback</Text>
+                </div>
+              </div>
+            </Card>
+          </Col>
+
+          <Col xs={6} sm={6} md={6} lg={3} xl={3} style={{ textAlign: 'left', marginBottom: 20, padding: 10 }}>
+            <Card style={{ padding: 20 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                <Handshake size={24} />
+                <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10, fontWeight: 600 }}>Customer Success</Text>
+                <div style={{ marginTop: 10 }}>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Onboarding feedback</Text>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Customer satisfaction</Text>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Exit interviews</Text>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Support quality</Text>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Churn analysis</Text>
+                </div>
+              </div>
+            </Card>
+          </Col>
+
+          <Col xs={6} sm={6} md={6} lg={3} xl={3} style={{ textAlign: 'left', marginBottom: 20, padding: 10 }}>
+            <Card style={{ padding: 20 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                <Book size={24} />
+                <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10, fontWeight: 600 }}>Market Research</Text>
+                <div style={{ marginTop: 10 }}>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Competitor analysis</Text>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Market validation</Text>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Buyer personas</Text>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Price sensitivity</Text>
+                  <Text size={isPageWide ? '3' : '2'} color="gray" as='div'>• Market trends</Text>
+                </div>
+              </div>
+            </Card>
+          </Col>
+        </Row>
+
+        {/* <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0, marginRight: 0, marginTop: 0 }}>
           
           <Col xs={6} sm={6} md={4} lg={3} xl={3} style={{ textAlign: 'left', marginBottom: 20, padding: 10 }}>
-            <Card style={{ marginBottom: 10, padding: 20, height: 200 }}>
+            <Card style={{ marginBottom: 10, padding: 20, minHeight: 200 }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                 <Lightbulb size={24} />
                 <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>Concept Testing</Text>
@@ -318,7 +315,7 @@ export default function Home() {
           </Col>
 
           <Col xs={6} sm={6} md={4} lg={3} xl={3} style={{ textAlign: 'left', marginBottom: 20, padding: 10 }}>
-            <Card style={{ marginBottom: 10, padding: 20, height: 200 }}>
+            <Card style={{ marginBottom: 10, padding: 20, minHeight: 200 }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                 <Star size={24} />
                 <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>Qualitative NPS</Text>
@@ -330,7 +327,7 @@ export default function Home() {
           </Col>
 
           <Col xs={6} sm={6} md={4} lg={3} xl={3} style={{ textAlign: 'left', marginBottom: 20, padding: 10 }}>
-            <Card style={{ marginBottom: 10, padding: 20, height: 200 }}>
+            <Card style={{ marginBottom: 10, padding: 20, minHeight: 200 }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                 <SquareLogo size={24} />
                 <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>Creative Testing</Text> 
@@ -342,19 +339,19 @@ export default function Home() {
           </Col>
 
           <Col xs={6} sm={6} md={4} lg={3} xl={3} style={{ textAlign: 'left', marginBottom: 20, padding: 10 }}>
-            <Card style={{ marginBottom: 10, padding: 20, height: 200 }}>
+            <Card style={{ marginBottom: 10, padding: 20, minHeight: 200 }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                 <AppleLogo size={24} />
                 <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>Brand Perception Research</Text>
                 <Text size={isPageWide ? '3' : '2'} color="gray" as='div' style={{ marginTop: 5 }}>
-                  Get authentic, unfiltered feedback to validate your product concepts before launch.
+                  Learn how your brand is perceived and identify opportunities to strengthen your market position.
                 </Text>
               </div>
             </Card>
           </Col>
 
           <Col xs={6} sm={6} md={4} lg={3} xl={3} style={{ textAlign: 'left', marginBottom: 20, padding: 10 }}>
-            <Card style={{ marginBottom: 10, padding: 20, height: 200 }}>
+            <Card style={{ marginBottom: 10, padding: 20, minHeight: 200 }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                 <Handshake size={24} />
                 <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>Value Proposition Testing</Text>
@@ -366,7 +363,7 @@ export default function Home() {
           </Col>
 
           <Col xs={6} sm={6} md={4} lg={3} xl={3} style={{ textAlign: 'left', marginBottom: 20, padding: 10 }}>
-            <Card style={{ marginBottom: 10, padding: 20, height: 200 }}>
+            <Card style={{ marginBottom: 10, padding: 20, minHeight: 200 }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                 <Browser size={24} />
                 <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>Product Feedback</Text>
@@ -378,7 +375,7 @@ export default function Home() {
           </Col>
 
           <Col xs={6} sm={6} md={4} lg={3} xl={3} style={{ textAlign: 'left', marginBottom: 20, padding: 10 }}>
-            <Card style={{ marginBottom: 10, padding: 20, height: 200 }}>
+            <Card style={{ marginBottom: 10, padding: 20, minHeight: 200 }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                 <Book size={24} />
                 <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>Course Feedback</Text>
@@ -390,7 +387,7 @@ export default function Home() {
           </Col>
 
           <Col xs={6} sm={6} md={4} lg={3} xl={3} style={{ textAlign: 'left', marginBottom: 20, padding: 10 }}>
-            <Card style={{ marginBottom: 10, padding: 20, height: 200 }}>
+            <Card style={{ marginBottom: 10, padding: 20, minHeight: 200 }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                 <NotePencil size={24} />
                 <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>Diary Study</Text>
@@ -400,7 +397,7 @@ export default function Home() {
               </div>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
 
                 {/* <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 20 }}>
           <Col xs={12} style={{ textAlign: 'center', padding: 0 }}>
@@ -418,13 +415,14 @@ export default function Home() {
             </Row> */}
 
         {/* How it works */}
-        <Row ref={howItWorksRef} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 80 }}>
+        <Row ref={howItWorksRef} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 100 }}>
           <Col xs={12} sm={11} md={12} style={{ textAlign: 'left', marginBottom: 20, padding: isPageWide ? 30 : 10 }}>
+            <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginBottom: 10 }}>How it works</Text>
             <h2>Customer insights, accelerated</h2>
             <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
               <Col xs={12} sm={11} md={9} lg={8} xl={7} style={{ textAlign: 'left', padding: 0 }}>
                 <Text size={isPageWide ? '4' : '3'} color="gray" as='div' style={{ marginTop: 10, marginBottom: 10 }}>
-                  Voicebridge is an AI-moderated conversational voice survey platform that replaces traditional forms, in-depth interviews and focus groups.
+                  Setting up a voice interview and sharing it with your audience takes just a few minutes with the help of our AI survey building assistant.
                 </Text>
               </Col>
             </Row>
@@ -478,11 +476,11 @@ export default function Home() {
                     gap: '12px'
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                      <img src="/assets/frontpage/responses/emma.png" style={{ width: 40, height: 40, borderRadius: '50%', border: '2px solid white', position: 'relative', zIndex: 5, marginRight: -10 }} />
-                      <img src="/assets/frontpage/responses/sofia.png" style={{ width: 40, height: 40, borderRadius: '50%', border: '2px solid white', position: 'relative', zIndex: 4, marginRight: -10 }} />
-                      <img src="/assets/frontpage/responses/priya.png" style={{ width: 40, height: 40, borderRadius: '50%', border: '2px solid white', position: 'relative', zIndex: 3, marginRight: -10 }} />
-                      <img src="/assets/frontpage/responses/dave.png" style={{ width: 40, height: 40, borderRadius: '50%', border: '2px solid white', position: 'relative', zIndex: 2, marginRight: -10 }} />
-                      <img src="/assets/frontpage/responses/michael.png" style={{ width: 40, height: 40, borderRadius: '50%', border: '2px solid white', position: 'relative', zIndex: 1 }} />
+                      <img src="/assets/frontpage/responses/emma.png" alt="Emma" style={{ width: 40, height: 40, borderRadius: '50%', border: '2px solid white', position: 'relative', zIndex: 5, marginRight: -10 }} />
+                      <img src="/assets/frontpage/responses/sofia.png" alt="Sofia" style={{ width: 40, height: 40, borderRadius: '50%', border: '2px solid white', position: 'relative', zIndex: 4, marginRight: -10 }} />
+                      <img src="/assets/frontpage/responses/priya.png" alt="Priya" style={{ width: 40, height: 40, borderRadius: '50%', border: '2px solid white', position: 'relative', zIndex: 3, marginRight: -10 }} />
+                      <img src="/assets/frontpage/responses/dave.png" alt="Dave" style={{ width: 40, height: 40, borderRadius: '50%', border: '2px solid white', position: 'relative', zIndex: 2, marginRight: -10 }} />
+                      <img src="/assets/frontpage/responses/michael.png" alt="Michael" style={{ width: 40, height: 40, borderRadius: '50%', border: '2px solid white', position: 'relative', zIndex: 1 }} />
                     </div>
                   </div>
                   <h3 style={{ margin: 0 }}>2</h3>
@@ -527,6 +525,7 @@ export default function Home() {
         {/* Voicebridge Features */}
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 80 }}>
           <Col xs={12} sm={11} md={12} style={{ textAlign: 'left', marginBottom: 20, padding: isPageWide ? 30 : 10 }}>
+            <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginBottom: 10 }}>Features</Text>
             <h2>Modern qualitative research, powered by AI</h2>
             <Row style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
               <Col xs={12} sm={11} md={9} lg={8} xl={7} style={{ textAlign: 'left', padding: 0 }}>
@@ -588,60 +587,24 @@ export default function Home() {
               {/* Natural-language querying */}
               <Col xs={12} sm={6} md={6} style={{ marginBottom: 20, padding: isPageWide ? 15 : 10 }}>
                 <Card style={{ padding: 24 }}>
-                  <div style={{ width: '100%', maxHeight: 300, backgroundColor: 'var(--gray-1)', borderRadius: 8, padding: 16, border: '1px solid var(--gray-5)' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 16 }}>
-                      <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-                        <div style={{ padding: 5, maxWidth: '80%' }}>
-                          <Text size="3" as="div" weight="bold">Show me all responses where users mentioned issues with the export functionality</Text>
-                        </div>
-                      </div>
-                      <div style={{ display: 'flex', gap: 8, alignItems: 'flex-end' }}>
-                        <div style={{ padding: 10, maxWidth: '80%', backgroundColor: 'var(--gray-2)', borderRadius: 8 }}>
-                          <Text size="3" as="div">I found 3 responses mentioning export functionality issues. The main pain points were: multiple steps required, lack of batch options, and limited export formats.</Text>
-                        </div>
-                      </div>
-                    </div>
-                    <div style={{ display: 'flex', gap: 8, alignItems: 'center', borderTop: '1px solid var(--gray-5)', paddingTop: 16 }}>
-                      <input 
-                        type="text"
-                        placeholder="Ask a question about your research data..."
-                        style={{
-                          flex: 1,
-                          padding: '8px 12px',
-                          borderRadius: 6,
-                          border: '1px solid var(--gray-5)',
-                          backgroundColor: 'white'
-                        }}
-                      />
-                      <button style={{ 
-                        padding: 8,
-                        borderRadius: 6,
-                        border: 'none',
-                        backgroundColor: '#007AFF',
-                        color: 'white',
-                        cursor: 'pointer'
-                      }}>
-                        <ArrowRight size={16} weight="bold" />
-                      </button>
-                    </div>
-                  </div>
+                  <Image src="/assets/screenshots/nps-survey-results-query.png" style={{ width: '100%', maxHeight: 300, objectFit: 'cover', margin: '0 auto', display: 'block' }} />
                   <h3 style={{ fontWeight: 600, marginTop: 20 }}>Natural-language querying</h3>
                   <Text size={isPageWide ? '3' : '2'} color="gray" as='div' style={{ marginTop: 20 }}>
                     Ask questions about your data in plain English and get instant, actionable answers.
                   </Text>
                 </Card>
               </Col>
-              {/* Stimuli images or video */}
+              {/* Stimuli images */}
               <Col xs={12} sm={6} md={6} style={{ marginBottom: 20, padding: isPageWide ? 15 : 10 }}>
                 <Card style={{ padding: 24 }}>
                   <Image src="/assets/frontpage/shoe.gif" style={{ width: '100%', maxHeight: 300, objectFit: 'contain', margin: '0 auto', display: 'block' }} />
-                  <h3 style={{ fontWeight: 600, marginTop: 20 }}>Stimuli images or video</h3>
+                  <h3 style={{ fontWeight: 600, marginTop: 20 }}>Stimuli images</h3>
                   <Text size={isPageWide ? '3' : '2'} color="gray" as='div' style={{ marginTop: 20 }}>
-                    Show participants images or videos to test reactions, concepts, or creative ideas in real time.
+                    Show participants images to test reactions, concepts, or creative ideas while they speak.
                   </Text>
                 </Card>
               </Col>
-              {/* Any language */}
+              {/* Multi-language support */}
               <Col xs={12} sm={6} md={6} style={{ marginBottom: 20, padding: isPageWide ? 15 : 10 }}>
                 <Card style={{ padding: 24 }}>
                   <div style={{ width: '100%', maxWidth: 300, height: 200, margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: 12 }}>
@@ -656,9 +619,9 @@ export default function Home() {
                     <Text size="4" style={{ color: '#007AFF' }}>हिंदी</Text>
                     <Text size="4" style={{ color: '#007AFF' }}>Italiano</Text>
                   </div>
-                  <h3 style={{ fontWeight: 600, marginTop: 20 }}>Any language</h3>
+                  <h3 style={{ fontWeight: 600, marginTop: 20 }}>Multi-language support</h3>
                   <Text size={isPageWide ? '3' : '2'} color="gray" as='div' style={{ marginTop: 20 }}>
-                    Run interviews and analyze responses in any language—reach a truly global audience.
+                    Run interviews in multiple languages—reach a truly global audience.
                   </Text>
                 </Card>
               </Col>
@@ -666,15 +629,15 @@ export default function Home() {
               <Col xs={12} sm={6} md={6} style={{ marginBottom: 20, padding: isPageWide ? 15 : 10 }}>
                 <Card style={{ padding: 24 }}>
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '-12px', margin: '0 auto', maxWidth: 300, height: 200 }}>
-                    <img src="/assets/frontpage/responses/emma.png" style={{ width: 60, height: 60, borderRadius: '50%', border: '2px solid white' }} />
-                    <img src="/assets/frontpage/responses/sofia.png" style={{ width: 60, height: 60, borderRadius: '50%', border: '2px solid white', marginLeft: -12 }} />
-                    <img src="/assets/frontpage/responses/priya.png" style={{ width: 60, height: 60, borderRadius: '50%', border: '2px solid white', marginLeft: -12 }} />
-                    <img src="/assets/frontpage/responses/dave.png" style={{ width: 60, height: 60, borderRadius: '50%', border: '2px solid white', marginLeft: -12 }} />
-                    <img src="/assets/frontpage/responses/michael.png" style={{ width: 60, height: 60, borderRadius: '50%', border: '2px solid white', marginLeft: -12 }} />
+                    <img src="/assets/frontpage/responses/emma.png" alt="Emma" style={{ width: 60, height: 60, borderRadius: '50%', border: '2px solid white' }} />
+                    <img src="/assets/frontpage/responses/sofia.png" alt="Sofia" style={{ width: 60, height: 60, borderRadius: '50%', border: '2px solid white', marginLeft: -12 }} />
+                    <img src="/assets/frontpage/responses/priya.png" alt="Priya" style={{ width: 60, height: 60, borderRadius: '50%', border: '2px solid white', marginLeft: -12 }} />
+                    <img src="/assets/frontpage/responses/dave.png" alt="Dave" style={{ width: 60, height: 60, borderRadius: '50%', border: '2px solid white', marginLeft: -12 }} />
+                    <img src="/assets/frontpage/responses/michael.png" alt="Michael" style={{ width: 60, height: 60, borderRadius: '50%', border: '2px solid white', marginLeft: -12 }} />
                   </div>
                   <h3 style={{ fontWeight: 600, marginTop: 20 }}>Recruit participants</h3>
                   <Text size={isPageWide ? '3' : '2'} color="gray" as='div' style={{ marginTop: 20 }}>
-                    Bring your own audience or let us help you recruit the right participants for your study.
+                    Bring your own audience, share on social media, or let us help you recruit the right participants for your study.
                   </Text>
                 </Card>
               </Col>
@@ -707,13 +670,13 @@ export default function Home() {
         {/* Final call to action */}
         <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: isPageWide ? 140 : 120, backgroundColor: '#1a1a1a', padding: '80px 20px', borderRadius: 12 }}>
           <Col xs={12} sm={11} md={11} lg={10} xl={10} style={{ textAlign: 'center', maxWidth: 800 }}>
-            <h2 style={{ color: 'white' }}>Start listening to your customers.</h2>
+            <h2 style={{ color: 'white' }}>Start conversations, don't send surveys.</h2>
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 0 }}>
               <Col xs={12} sm={10} md={9} lg={8} xl={8} style={{ textAlign: 'center' }}>
-                <Text size={isPageWide ? "4" : "3"} color="gray" as='div' style={{ color: '#e0e0e0' }}>Capture feedback with conversational AI voice surveys - authentic insights for you, better experiences for them.</Text>
+                <Text size={isPageWide ? "4" : "3"} color="gray" as='div' style={{ color: '#e0e0e0' }}>Capture authentic insights with conversational AI voice interviews. Better experience for them, better decisions for you.</Text>
                 <Button variant="solid" size="4" color="green" style={{ marginTop: 40 }} onClick={() => window.open('https://cal.com/voicebridge/demo', '_blank', 'noopener,noreferrer')}>Book a demo<ArrowUpRight size={16} weight="bold" /></Button>
                 <div style={{ marginTop: 20 }}>
-                  <Text size="1" style={{ color: '#a0a0a0' }}>30-minute call • No commitment</Text>
+                  <Text size="1" style={{ color: '#a0a0a0' }}>60-minute call • No commitment</Text>
                 </div>
               </Col>
             </Row>
