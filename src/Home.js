@@ -63,7 +63,7 @@ export default function Home() {
                 <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>For feedback, reviews, testimonials, and research, use Voicebridge to conduct voice interviews, analyze responses, and generate actionable insights.</Text>
                 <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-start', marginTop: 20 }}>
                   <Button variant="solid" size={isPageWide ? '4' : '3'} onClick={openBookDemo}>Book a demo <ArrowUpRight size={16} weight="bold" /></Button>
-                  <Button variant="outline" size={isPageWide ? '4' : '3'} onClick={() => window.open('https://surveys.voicebridgeai.com/s/0cbcfb60-af23-41c3-bb8f-824bfd6495db', '_blank', 'noopener,noreferrer')}>Try it out <ArrowUpRight size={16} weight="bold" /></Button>
+                  {/* <Button variant="outline" size={isPageWide ? '4' : '3'} onClick={() => window.open('https://surveys.voicebridgeai.com/s/0cbcfb60-af23-41c3-bb8f-824bfd6495db', '_blank', 'noopener,noreferrer')}>Try it out <ArrowUpRight size={16} weight="bold" /></Button> */}
                 </div>
               </Col>
             </Row>
