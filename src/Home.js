@@ -1,12 +1,12 @@
-import React, { useContext, useRef, useEffect, useState } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import { Row, Col, Image, Navbar, Nav } from 'react-bootstrap';
 import { Button, Text, Link, Card } from '@radix-ui/themes';
-import { ArrowUpRight, LinkedinLogo, Microphone, XLogo, NotePencil, SquaresFour, Sparkle, Lightbulb, Star, SquareLogo, AppleLogo, Handshake, Browser, Book } from '@phosphor-icons/react';
+import { ArrowUpRight, LinkedinLogo, Microphone, XLogo, NotePencil, SquaresFour, Sparkle, Lightbulb, Star, Handshake, Browser, Book } from '@phosphor-icons/react';
 import { useMediaQuery } from './shared-functions.js';
 import { ThemeContext } from './Theme.js';
 import { faqItems } from './config/faqs.js';
 import FaqItem from './components/FaqItem.js';
-import { toast, Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 // import Marquee from 'react-fast-marquee';
 // import { SAMPLE_RESPONSES_1, SAMPLE_RESPONSES_2 } from './config/responses.js';
 // import AudioIcon from './components/AudioIcon.js';
@@ -16,16 +16,12 @@ export default function Home() {
   let isPageWide = useMediaQuery('(min-width: 640px)');
   const { theme } = useContext(ThemeContext);
 
-  const [selectedUseCase, setSelectedUseCase] = useState('concept-testing');
-  const [loading, setLoading] = useState(true);
-
   const howItWorksRef = useRef(null);
   const useCasesRef = useRef(null);
   const faqsRef = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setLoading(false);
   }, []);
 
   const scrollEffect = (ref) => {
@@ -36,7 +32,7 @@ export default function Home() {
   };
 
   const openBookDemo = () => {
-    window.open('https://cal.com/voicebridge/demo', '_blank', 'noopener,noreferrer');
+    window.location.href = 'mailto:hello@voicebridgeai.com?subject=Request%20a%20Voicebridge%20demo';
   };
 
   return (
@@ -50,7 +46,7 @@ export default function Home() {
           <Nav className="ml-auto" style={{ marginRight: 0 }}>
             <Nav.Link onClick={() => scrollEffect(useCasesRef)}>Use cases</Nav.Link>
             <Nav.Link onClick={() => scrollEffect(howItWorksRef)}>How it works</Nav.Link>
-            {isPageWide && <Nav.Link onClick={() => window.open('https://cal.com/voicebridge/demo', '_blank', 'noopener,noreferrer')}>Book a demo <ArrowUpRight size={16} weight="bold" /></Nav.Link>}
+            {isPageWide && <Nav.Link onClick={openBookDemo}>Book a demo <ArrowUpRight size={16} weight="bold" /></Nav.Link>}
           </Nav>
         </Navbar>
 
@@ -63,7 +59,7 @@ export default function Home() {
                 <Text size={isPageWide ? '4' : '3'} as='div' style={{ marginTop: 10 }}>For feedback, reviews, testimonials, and research, use Voicebridge to conduct voice interviews, analyze responses, and generate actionable insights.</Text>
                 <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-start', marginTop: 20 }}>
                   <Button variant="solid" size={isPageWide ? '4' : '3'} onClick={openBookDemo}>Book a demo <ArrowUpRight size={16} weight="bold" /></Button>
-                  {/* <Button variant="outline" size={isPageWide ? '4' : '3'} onClick={() => window.open('https://surveys.voicebridgeai.com/s/0cbcfb60-af23-41c3-bb8f-824bfd6495db', '_blank', 'noopener,noreferrer')}>Try it out <ArrowUpRight size={16} weight="bold" /></Button> */}
+                  {/* <Button variant="outline" size={isPageWide ? '4' : '3'} onClick={() => window.location.href = 'mailto:hello@voicebridgeai.com?subject=Request%20a%20Voicebridge%20demo'}>Try it out <ArrowUpRight size={16} weight="bold" /></Button> */}
                 </div>
               </Col>
             </Row>
@@ -674,7 +670,7 @@ export default function Home() {
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 0 }}>
               <Col xs={12} sm={10} md={9} lg={8} xl={8} style={{ textAlign: 'center' }}>
                 <Text size={isPageWide ? "4" : "3"} color="gray" as='div' style={{ color: '#e0e0e0' }}>Capture authentic insights with conversational AI voice interviews. Better experience for them, better decisions for you.</Text>
-                <Button variant="solid" size="4" color="green" style={{ marginTop: 40 }} onClick={() => window.open('https://cal.com/voicebridge/demo', '_blank', 'noopener,noreferrer')}>Book a demo<ArrowUpRight size={16} weight="bold" /></Button>
+                <Button variant="solid" size="4" color="green" style={{ marginTop: 40 }} onClick={openBookDemo}>Book a demo<ArrowUpRight size={16} weight="bold" /></Button>
                 <div style={{ marginTop: 20 }}>
                   <Text size="1" style={{ color: '#a0a0a0' }}>60-minute call • No commitment</Text>
                 </div>

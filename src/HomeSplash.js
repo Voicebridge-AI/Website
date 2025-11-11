@@ -44,7 +44,14 @@ export default function Home() {
             <Row style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 0, marginRight: 0, marginTop: 10 }}>
               <Col xs={11} sm={11} md={8} style={{ textAlign: 'center', padding: 0 }}>
                 <Text size='4' color="gray" as='div' style={{ marginTop: 10 }}>Human-like AI voice agents conduct and analyze deep, conversational voice interviews to gather detailed insights that are impossible to get with traditional, rigid survey methods.</Text>
-                <Button variant="solid" size="3" style={{ marginTop: 24 }} onClick={() => window.location.href = 'https://cal.com/voicebridge/30-min'}><Calendar size={18} weight="bold" style={{ marginRight: 0 }} /> Book a demo</Button>
+                <Button
+                  variant="solid"
+                  size="3"
+                  style={{ marginTop: 24 }}
+                  onClick={() => window.location.href = 'mailto:hello@voicebridgeai.com?subject=Request%20a%20Voicebridge%20demo'}
+                >
+                  <Calendar size={18} weight="bold" style={{ marginRight: 0 }} /> Book a demo
+                </Button>
               </Col>
             </Row>
           </Col>
